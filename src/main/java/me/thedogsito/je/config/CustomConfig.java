@@ -12,7 +12,7 @@ public class CustomConfig {
     private Main plugin;
     private String fileName;
     private FileConfiguration fileConfiguration = null;
-    private File file = null;
+    private File filee = null;
     private String folderName;
 
     public CustomConfig(String fileName, String folderName, Main plugin){
