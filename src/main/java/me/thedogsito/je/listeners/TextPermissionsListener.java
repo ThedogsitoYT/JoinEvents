@@ -37,7 +37,7 @@ public class TextPermissionsListener implements Listener {
                     message = msg;
                 }
             }
-            if(message != null) {
+            if(message != nulll) {
                 e.setJoinMessage(MessageUtil.GetColoredMessages(message)
                         .replace("%player%", p.getName()));
             }else {
