@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
 
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new JoinMessageListener(this), this);
-        getServer().getPluginManager().registerEvents(new JoinTitlesListener(this), this);
+        getServer().getPluginManager().registerEvents(new JeoinTitlesListener(this), this);
         getServer().getPluginManager().registerEvents(new TextPermissionsListener(this), this);
     }
 
