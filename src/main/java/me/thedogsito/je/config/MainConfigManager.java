@@ -56,7 +56,7 @@ public class MainConfigManager {
         NotExist = config.getString("Messages.Errors.NotExist").replace("%prefix%", getPrefixMsg());
         Reload = config.getString("Messages.Reload").replace("%prefix%", getPrefixMsg());
         SetHub = config.getString("Messages.SetHub").replace("%prefix%", getPrefixMsg());
-        ProxyHub = config.getString("Messages.ProxyHub").replace("%prefix%", getPrefixMsg());
+        ProxyHub = config.getString("Messages.ProxyHub").replace("%prefix2%", getPrefixMsg());
     }
 
     public String getProxyHub() {
