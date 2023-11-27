@@ -17,7 +17,7 @@ public class JoinTitlesListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        MainConfigManageraa mainConfigManager = plugin.getMainConfigManager();
+        MainConfigManager mainConfigManager = plugin.getMainConfigManager();
 
         if(mainConfigManager.isTitleEnabled()) {
             if(!p.hasPermission("je.get" + "je.*")) {
