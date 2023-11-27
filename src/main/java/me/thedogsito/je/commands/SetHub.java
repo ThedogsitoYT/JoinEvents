@@ -59,9 +59,6 @@ public class SetHub implements CommandExecutor {
         config.set("Config.Commands.Hub.Yaw", yaw);
         config.set("Config.Commands.Hub.Pitch", pitch);
         config.set("Config.Commands.Hub.World", world);
-
-        BungeeListener.sendBungeeMessage(p.getName(), "GetServer");
-
         plugin.saveConfig();
 
         sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getSetHub()
