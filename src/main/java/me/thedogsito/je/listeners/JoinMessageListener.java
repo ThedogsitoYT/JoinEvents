@@ -22,7 +22,7 @@ public class JoinMessageListener implements Listener {
         MainConfigManager mainConfigManager = plugin.getMainConfigManager();
 
         if(mainConfigManager.isWelcomeMessageEnabled()) {
-            List<String> messag = mainConfigManager.getWelcomeMessageText();
+            List<String> message = mainConfigManager.getWelcomeMessageText();
             for(String m : message) {
                 p.sendMessage(MessageUtil.GetColoredMessages(m)
                         .replace("%player%", p.getName()));

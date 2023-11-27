@@ -2,7 +2,7 @@ main: me.thedogsito.je.Main
 name: JoinEvents
 version: 3.0.0
 author: Thedogsito
-api-version: 1.20
+api-version: 1.21
 
 commands:
   je:
