@@ -1,0 +1,62 @@
+Config:
+  #prefix that you can use with %prefix%
+  Prefix: '&3&l[&b&lJoinEvents&3&l]'
+  Join:
+    WelcomeMessage:
+      #define if the welcome text is activated you can use "true/false"
+      Enabled: true
+      #defines the text of the welcome message
+      Text:
+        - '&8&m&l+---------------------------------------+'
+        - '                      &a&lWelcome %player%'
+        - ' '
+        - '     &c&lYoutube: &cYour Youtube'
+        - '        &3&lTwitter/x: &bYour twitter'
+        - '           &b&l¡Visit our store mc.example.net!'
+        - '&8&m&l+---------------------------------------+'
+    TextForRank:
+      #define if the welcome text for those who have permits is activated you can use "true/false"
+      Enabled: true
+      Permission:
+        - 'je.vip'
+        - 'je.vip+'
+        - 'je.mvp'
+        - 'je.mvp+'
+      #defines the text when someone with permission enters
+      EnteredMessages:
+        - '&3&l[&b&l+&3&l] &3&lV&b&lip &b&l%player%'
+        - '&3&l[&b&l+&3&l] &3&lV&b&lip3&l+ &b&l%player%'
+        - '&6&l[&e&l+&6&l] &6&lMvp &6&l%player%'
+        - '&6&l[&e&l+&6&l] &6&lMvp+ &6&l%player%'
+      #defines the text when someone with permission exit
+      LeavingMessage:
+        - '&4&l[&c&l-&4&l] &3&lV&b&lip &b&l%player%'
+        - '&4&l[&c&l-&4&l] &3&lV&b&lip3&l+ &b&l%player%'
+        - '&4&l[&c&l-&4&l] &6&lMvp &6&l%player%'
+        - '&4&l[&c&l-&4&l] &6&lMvp+ &6&l%player%'
+      #defines the sound when someone with permission join
+      Sounds:
+        -
+        -
+        -
+        -
+    Titles:
+      #define if the welcome text for those who have permits is activated you can use "true/false
+      Enabled: true
+      Title: '&b&lWelcome %player%!'
+      SubTitle: '&b&lThanks for enter to the server'
+  Commands:
+    Hub:
+      SecondsWait: 3
+Messages:
+  Errors:
+    #defines the error of "not permissions"
+    NotPermission: '%prefix% &c&lYou do not have permissions to run this command'
+    #defines the error of "not exist"
+    NotExist: '%prefix% &c&lThat command does not exist use /je help'
+    #defines the error of "error argument of get"
+    ErrorArgumentOfGet: '%prefix% &c&lPlease use <version/author>'
+  #defines message of reload
+  Reload: '%prefix% &b&lThe plugin was successfully reloaded'
+  SetHub: '%prefix% &b&lThe hub is setted'
+  HubTeleporting: '%prefix% &b&lTeleporting lobby in %wait%...'
