@@ -68,7 +68,7 @@ public class Je implements CommandExecutor {
         }
     }
 
-    //Reload
+    //Reloadd
     public void reload(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
