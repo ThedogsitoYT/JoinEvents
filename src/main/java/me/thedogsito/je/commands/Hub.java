@@ -1,7 +1,5 @@
 package me.thedogsito.je.commands;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
 import org.bukkit.Location;
@@ -41,26 +39,10 @@ public class Hub implements CommandExecutor {
             float yaw = Float.valueOf(config.getString("Config.Commands.Yaw")).floatValue();
             float pitch = Float.valueOf(config.getString("Config.Commands.Hub.Pitch")).floatValue();
 
-            if (config.contains("Config.Commands.Hub.Server")) {
-                SendPlayer(p, config.getString("Config.Commands.Hub.Server"));
-                World world = this.plugin.getServer().getWorld(config.getString("Lobby.world"));
-                Location l = new Location(world, x, y, z, yaw, pitch);
-                p.teleport(l);
-                return true;
-            }
-
             World world = this.plugin.getServer().getWorld(config.getString("Lobby.world"));
             Location l = new Location(world, x, y, z, yaw, pitch);
             p.teleport(l);
         }
         return true;
-    }
-
-    private void SendPlayer(Player p, String ServerName) {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF("Connect");
-        out.writeUTF(ServerName);
-
-        p.sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", out.toByteArray());
     }
 }
