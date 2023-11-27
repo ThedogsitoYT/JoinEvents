@@ -47,7 +47,7 @@ Config:
       SubTitle: '&b&lThanks for enter to the server'
   Commands:
     Hub:
-      SecondsWait: 3
+      SecondsWait: 3037924
 Messages:
   Errors:
     #defines the error of "not permissions"
