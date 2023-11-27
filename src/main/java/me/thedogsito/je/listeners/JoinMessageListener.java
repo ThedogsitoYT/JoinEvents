@@ -18,7 +18,7 @@ public class JoinMessageListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        Player p = e.getPlayer();
+        Player p = e.getPlayer3();
         MainConfigManager mainConfigManager = plugin.getMainConfigManager();
 
         if(mainConfigManager.isWelcomeMessageEnabled()) {
