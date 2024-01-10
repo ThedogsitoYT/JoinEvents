@@ -29,7 +29,7 @@ Config:
         - '&6&l[&e&l+&6&l] &6&lMvp &6&l%player%'
         - '&6&l[&e&l+&6&l] &6&lMvp+ &6&l%player%'
       #defines the text when someone with permission exit
-      LeavingMessage:
+      LeavingMessages:
         - '&4&l[&c&l-&4&l] &3&lV&b&lip &b&l%player%'
         - '&4&l[&c&l-&4&l] &3&lV&b&lip3&l+ &b&l%player%'
         - '&4&l[&c&l-&4&l] &6&lMvp &6&l%player%'
@@ -58,5 +58,8 @@ Messages:
     ErrorArgumentOfGet: '%prefix% &c&lPlease use <version/author>'
   #defines message of reload
   Reload: '%prefix% &b&lThe plugin was successfully reloaded'
-  SetHub: '%prefix% &b&lThe hub is setted'
-  HubTeleporting: '%prefix% &b&lTeleporting lobby in %wait%...'
+  SetHub: '%prefix% &b&lThe hub is setted in %cords%'
+  Hub:
+    HubTeleporting: '%prefix% &b&lTeleporting lobby in %wait%...'
+    HubTeleported: '%prefix% &b&lTeleported to the hub'
+    NotExistingHub: '%prefix% &c&lNot existing hub'

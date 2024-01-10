@@ -1,6 +1,6 @@
 main: me.thedogsito.je.Main
 name: JoinEvents
-version: 3.0.0
+version: Test version 3.0.0
 author: Thedogsito
 api-version: 1.20
 
@@ -13,3 +13,7 @@ commands:
     description: This command allows you to put a hub
     aliases:
       - setlobby
+  hub:
+    description: This command allows you to go to the hub
+    aliases:
+      - lobby

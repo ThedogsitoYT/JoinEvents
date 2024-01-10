@@ -25,8 +25,10 @@ public class MainConfigManager {
     private String ErrorArgumentOfGet;
     private String Reload;
     private String SetHub;
-    private String ProxyServer;
-    private String ProxyHub;
+    private Integer HubTeleportingSeconds;
+    private String TeleportingHub;
+    private String HubTeleported;
+    private String NotExistingHub;
 
     public MainConfigManager(Main plugin) {
         this.plugin = plugin;
@@ -56,15 +58,27 @@ public class MainConfigManager {
         NotExist = config.getString("Messages.Errors.NotExist").replace("%prefix%", getPrefixMsg());
         Reload = config.getString("Messages.Reload").replace("%prefix%", getPrefixMsg());
         SetHub = config.getString("Messages.SetHub").replace("%prefix%", getPrefixMsg());
-        ProxyHub = config.getString("Messages.ProxyHub").replace("%prefix%", getPrefixMsg());
+        TeleportingHub = config.getString("Messages.Hub.HubTeleporting").replace("%prefix%", getPrefixMsg());
+        HubTeleported = config.getString("Messages.Hub.HubTeleported").replace("%prefix%", getPrefixMsg());
+        NotExistingHub = config.getString("Messages.NotExistingHub").replace("%prefix%", getPrefixMsg());
+
+        HubTeleportingSeconds = config.getInt("Config.Commands.Hub.SecondsWait");
     }
 
-    public String getProxyHub() {
-        return ProxyHub;
+    public String getNotExistingHub() {
+        return NotExistingHub;
     }
 
-    public String getProxyServer() {
-        return ProxyServer;
+    public String getHubTeleporting() {
+        return TeleportingHub;
+    }
+
+    public String getHubTeleported() {
+        return HubTeleported;
+    }
+
+    public Integer getHubTeleportingSeconds() {
+        return HubTeleportingSeconds;
     }
 
     public String getSetHub() {

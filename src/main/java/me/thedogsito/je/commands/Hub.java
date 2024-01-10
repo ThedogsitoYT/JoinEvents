@@ -1,5 +1,6 @@
 package me.thedogsito.je.commands;
 
+import com.google.common.util.concurrent.AbstractScheduledService;
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
 import org.bukkit.Location;
@@ -9,6 +10,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Hub implements CommandExecutor {
     private Main plugin;
@@ -33,15 +39,26 @@ public class Hub implements CommandExecutor {
         }
 
         if (config.contains("Config.Commands.Hub.X")) {
-            double x = Double.valueOf(config.getString("Config.Commands.Hub.X")).doubleValue();
-            double y = Double.valueOf(config.getString("Config.Commands.Hub.Y")).doubleValue();
-            double z = Double.valueOf(config.getString("Config.Commands.Hub.Z")).doubleValue();
-            float yaw = Float.valueOf(config.getString("Config.Commands.Yaw")).floatValue();
-            float pitch = Float.valueOf(config.getString("Config.Commands.Hub.Pitch")).floatValue();
+            Integer WaitingSeconds = plugin.getMainConfigManager().getHubTeleportingSeconds();
 
-            World world = this.plugin.getServer().getWorld(config.getString("Lobby.world"));
-            Location l = new Location(world, x, y, z, yaw, pitch);
-            p.teleport(l);
+            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleporting())
+                    .replace("%wait%", String.valueOf(WaitingSeconds)));
+
+            double x = Double.valueOf(config.getString("Config.Commands.Hub.X").replace(',', '.')).doubleValue();
+            double y = Double.valueOf(config.getString("Config.Commands.Hub.Y").replace(',', '.')).doubleValue();
+            double z = Double.valueOf(config.getString("Config.Commands.Hub.Z").replace(',', '.')).doubleValue();
+            float yaw = Float.valueOf(config.getString("Config.Commands.Hub.Yaw").replace(',', '.')).floatValue();
+            float pitch = Float.valueOf(config.getString("Config.Commands.Hub.Pitch").replace(',', '.')).floatValue();
+
+            BukkitScheduler scheduler = plugin.getServer().getScheduler();
+            scheduler.runTaskLater(plugin, () -> {
+                World world = this.plugin.getServer().getWorld(config.getString("Config.Commands.Hub.World"));
+                Location l = new Location(world, x, y, z, yaw, pitch);
+                p.teleport(l);
+                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleported()));
+            }, WaitingSeconds * 20L);
+        }else {
+            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub()));
         }
         return true;
     }

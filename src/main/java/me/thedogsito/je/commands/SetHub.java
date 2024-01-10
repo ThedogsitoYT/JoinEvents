@@ -1,7 +1,6 @@
 package me.thedogsito.je.commands;
 
 import me.thedogsito.je.Main;
-import me.thedogsito.je.utils.BungeeListener;
 import me.thedogsito.je.utils.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -17,8 +16,6 @@ public class SetHub implements CommandExecutor {
 
     public SetHub(Main plugin) {
         this.plugin = plugin;
-        plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
-        plugin.getServer().getMessenger().registerIncomingPluginChannel(plugin, "BungeeCord", new BungeeListener(plugin));
     }
 
     @Override

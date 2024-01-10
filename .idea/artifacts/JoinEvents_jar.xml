@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JoinEvents:jar">
+    <output-path>$USER_HOME$/OneDrive/Escritorio/test server/plugins</output-path>
+    <root id="archive" name="JoinEvents.jar">
+      <element id="module-output" name="JoinEvents" />
+    </root>
+  </artifact>
+</component>
