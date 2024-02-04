@@ -9,7 +9,7 @@ public class MainConfigManager {
     private CustomConfig configFile;
     private Main plugin;
 
-    private String PrefixMsg;
+    private String Prefix;
     private List<String> WelcomeMessageText;
     private Boolean WelcomeMessageEnabled;
     private List<String> MessageWithPermission;
@@ -29,6 +29,13 @@ public class MainConfigManager {
     private String TeleportingHub;
     private String HubTeleported;
     private String NotExistingHub;
+    private Integer WarpTeleportingSeconds;
+    private String WarpTeleporting;
+    private String WarpTeleported;
+    private String NotExistingWarp;
+    private String WarpError;
+    private String SetWarp;
+    private String DelWarp;
 
     public MainConfigManager(Main plugin) {
         this.plugin = plugin;
@@ -39,30 +46,61 @@ public class MainConfigManager {
 
     public void loadConfig() {
         FileConfiguration config = configFile.getConfig();
-        PrefixMsg = config.getString("Config.Prefix");
+        Prefix = config.getString("Config.Prefix");
 
         WelcomeMessageText = config.getStringList("Config.Join.WelcomeMessage.Text");
         MessageWithPermission = config.getStringList("Config.Join.TextForRank.Permission");
         MessageWithPermissionText = config.getStringList("Config.Join.TextForRank.EnteredMessages");
         MessageWithPermissionLeaving = config.getStringList("Config.Join.TextForRank.LeavingMessages");
-        SoundPermission = config.getStringList("Config.Join.TextForRank.Sounds");
+        SoundPermission = config.getStringList("Config.Join.TextForRank.SoundsJoin");
 
         WelcomeMessageEnabled = config.getBoolean("Config.Join.WelcomeMessage.Enabled");
         TitleEnabled = config.getBoolean("Config.Join.Titles.Enabled");
         MessageWithPermissionEnabled = config.getBoolean("Config.Join.TextForRank.Enabled");
 
-        Title = config.getString("Config.Join.Titles.Title").replace("%prefix%", getPrefixMsg());
-        SubTitle = config.getString("Config.Join.Titles.SubTitle").replace("%prefix%", getPrefixMsg());
-        NotPermission = config.getString("Messages.Errors.NotPermission").replace("%prefix%", getPrefixMsg());
-        ErrorArgumentOfGet = config.getString("Messages.Errors.ErrorArgumentOfGet").replace("%prefix%", getPrefixMsg());
-        NotExist = config.getString("Messages.Errors.NotExist").replace("%prefix%", getPrefixMsg());
-        Reload = config.getString("Messages.Reload").replace("%prefix%", getPrefixMsg());
-        SetHub = config.getString("Messages.SetHub").replace("%prefix%", getPrefixMsg());
-        TeleportingHub = config.getString("Messages.Hub.HubTeleporting").replace("%prefix%", getPrefixMsg());
-        HubTeleported = config.getString("Messages.Hub.HubTeleported").replace("%prefix%", getPrefixMsg());
-        NotExistingHub = config.getString("Messages.NotExistingHub").replace("%prefix%", getPrefixMsg());
+        Title = config.getString("Config.Join.Titles.Title").replace("%prefix%", getPrefix());
+        SubTitle = config.getString("Config.Join.Titles.SubTitle").replace("%prefix%", getPrefix());
+        NotPermission = config.getString("Messages.Errors.NotPermission").replace("%prefix%", getPrefix());
+        ErrorArgumentOfGet = config.getString("Messages.Errors.ErrorArgumentOfGet").replace("%prefix%", getPrefix());
+        NotExist = config.getString("Messages.Errors.NotExist").replace("%prefix%", getPrefix());
+        Reload = config.getString("Messages.Reload").replace("%prefix%", getPrefix());
+        SetHub = config.getString("Messages.SetHub").replace("%prefix%", getPrefix());
+        SetWarp = config.getString("Messages.SetWarp");
+        DelWarp = config.getString("Messages.DelWarp");
+        TeleportingHub = config.getString("Messages.Hub.HubTeleporting").replace("%prefix%", getPrefix());
+        HubTeleported = config.getString("Messages.Hub.HubTeleported").replace("%prefix%", getPrefix());
+        NotExistingHub = config.getString("Messages.Hub.NotExistingHub").replace("%prefix%", getPrefix());
+        WarpTeleporting = config.getString("Messages.Warps.WarpTeleporting"); //ponerle el prefix cuando se haga el /warp
+        WarpTeleported = config.getString("Messages.Warps.WarpTeleported"); //ponerle el prefix cuando se haga el /warp
+        WarpError = config.getString("Messages.Warps.WarpError");
+        NotExistingWarp = config.getString("Messages.Warps.NotExistingWarp"); //ponerle el prefix cuando se haga el /warp
 
         HubTeleportingSeconds = config.getInt("Config.Commands.Hub.SecondsWait");
+        WarpTeleportingSeconds = config.getInt("Config.Commands.Warp.SecondsWait");
+    }
+
+    public String getWarpError() {
+        return WarpError;
+    }
+
+    public String getDelWarp() {
+        return DelWarp;
+    }
+
+    public String getSetWarp() {
+        return SetWarp;
+    }
+
+    public String getWarpTeleporting() {
+        return WarpTeleporting;
+    }
+
+    public String getWarpTeleported() {
+        return WarpTeleported;
+    }
+
+    public String getNotExistingWarp() {
+        return NotExistingWarp;
     }
 
     public String getNotExistingHub() {
@@ -79,6 +117,10 @@ public class MainConfigManager {
 
     public Integer getHubTeleportingSeconds() {
         return HubTeleportingSeconds;
+    }
+
+    public Integer getWarpTeleportingSeconds() {
+        return WarpTeleportingSeconds;
     }
 
     public String getSetHub() {
@@ -114,8 +156,8 @@ public class MainConfigManager {
         return SoundPermission;
     }
 
-    public String getPrefixMsg() {
-        return PrefixMsg;
+    public String getPrefix() {
+        return Prefix;
     }
 
     public List<String> getMessageWithPermissionLeaving() {

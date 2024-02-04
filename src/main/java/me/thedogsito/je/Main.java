@@ -1,14 +1,13 @@
 package me.thedogsito.je;
 
-import me.thedogsito.je.commands.Hub;
-import me.thedogsito.je.commands.Je;
-import me.thedogsito.je.commands.SetHub;
+import me.thedogsito.je.commands.*;
 import me.thedogsito.je.config.MainConfigManager;
 import me.thedogsito.je.listeners.JoinMessageListener;
 import me.thedogsito.je.listeners.JoinTitlesListener;
 import me.thedogsito.je.listeners.TextPermissionsListener;
 import me.thedogsito.je.utils.MessageUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -18,10 +17,10 @@ public class Main extends JavaPlugin {
 
     public void onEnable() {
         mainConfigManager = new MainConfigManager(this);
-        registerEvents();
-        registerCommands();
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)"));
+        registerEvents();
+        registerCommands();
     }
 
     public void onDisable() {
@@ -31,8 +30,11 @@ public class Main extends JavaPlugin {
 
     public void registerCommands() {
         this.getCommand("je").setExecutor(new Je(this));
-        this.getCommand("hub").setExecutor(new Hub(this));
         this.getCommand("sethub").setExecutor(new SetHub(this));
+        this.getCommand("delhub").setExecutor(new DelHub(this));
+        this.getCommand("hub").setExecutor(new Hub(this));
+        this.getCommand("setwarp").setExecutor(new SetWarp(this));
+        this.getCommand("delwarp").setExecutor(new DelWarp(this));
     }
 
     public void registerEvents() {

@@ -1,6 +1,6 @@
 main: me.thedogsito.je.Main
 name: JoinEvents
-version: Test version 3.0.0
+version: 3.0.0
 author: Thedogsito
 api-version: 1.20
 
@@ -13,7 +13,31 @@ commands:
     description: This command allows you to put a hub
     aliases:
       - setlobby
+  delhub:
+    description: This command allows you to go to the hub
+    aliases:
+      - dellobby
   hub:
     description: This command allows you to go to the hub
     aliases:
       - lobby
+  warp:
+    description: This command allows you to go to the warps
+    aliases:
+      - w
+      - spawn
+  warplist:
+      description: This command allows show the warps available
+      aliases:
+        - wlist
+        - spawnlist
+  setwarp:
+    description: This command allows you to put a warp
+    aliases:
+      - sw
+      - setspawn
+  delwarp:
+    description: This command allows delete this warp
+    aliases:
+      - dw
+      - delspawn

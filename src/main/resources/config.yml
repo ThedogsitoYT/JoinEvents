@@ -35,7 +35,7 @@ Config:
         - '&4&l[&c&l-&4&l] &6&lMvp &6&l%player%'
         - '&4&l[&c&l-&4&l] &6&lMvp+ &6&l%player%'
       #defines the sound when someone with permission join
-      Sounds:
+      SoundsJoin:
         -
         -
         -
@@ -48,6 +48,8 @@ Config:
   Commands:
     Hub:
       SecondsWait: 3
+    Warps:
+      SecondsWait: 3
 Messages:
   Errors:
     #defines the error of "not permissions"
@@ -58,8 +60,20 @@ Messages:
     ErrorArgumentOfGet: '%prefix% &c&lPlease use <version/author>'
   #defines message of reload
   Reload: '%prefix% &b&lThe plugin was successfully reloaded'
+  #defines message of hub and warp
   SetHub: '%prefix% &b&lThe hub is setted in %cords%'
+  DelHub: '%prefix% &c&lThe hub &c&lis deleted'
+  SetWarp: '%prefix% &b&lThe warp &3&l"%name%"&b&l is setted in %cords%'
+  DelWarp: '%prefix% &c&lThe warp &6&l"%name%" &c&lis deleted'
+  #defines message of hub
   Hub:
-    HubTeleporting: '%prefix% &b&lTeleporting lobby in %wait%...'
+    HubTeleporting: '%prefix% &b&lTeleporting hub in %wait%...'
     HubTeleported: '%prefix% &b&lTeleported to the hub'
     NotExistingHub: '%prefix% &c&lNot existing hub'
+  #defines message of warps
+  Warps:
+    WarpTeleporting: '%prefix% &b&lTeleporting to the warp %name% in %wait%...'
+    WarpTeleported: '%prefix% &b&lTeleported to the warp %name%'
+    WarpError: '%prefix% &c&lPlease use the command /setwarp <name>'
+    WarpError2: '%prefix% &c&lPlease use the command /delwarp <name>'
+    NotExistingWarp: '%prefix% &c&lThat warp does not exist or you did not enter a name use: /warp <name>'

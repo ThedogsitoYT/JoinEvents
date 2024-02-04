@@ -107,11 +107,11 @@ public class Je implements CommandExecutor {
 
             if(args[1].equalsIgnoreCase("author")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefixMsg() + "&b&lThis author is:&3&l " + plugin.getDescription().getAuthors())
+                        plugin.getMainConfigManager().getPrefix() + "&b&lThis author is:&3&l " + plugin.getDescription().getAuthors())
                 );
             }else if(args[1].equalsIgnoreCase("version")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefixMsg() + "&b&lThis version is:&3&l " + plugin.getDescription().getVersion()));
+                        plugin.getMainConfigManager().getPrefix() + "&b&lThis version is:&3&l " + plugin.getDescription().getVersion()));
             }else {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getErrorArgumentOfGet()
@@ -126,11 +126,11 @@ public class Je implements CommandExecutor {
 
             if(args[1].equalsIgnoreCase("author")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefixMsg() + "&b&lThis author is:&3&l " + plugin.getDescription().getAuthors())
+                        plugin.getMainConfigManager().getPrefix() + "&b&lThis author is:&3&l " + plugin.getDescription().getAuthors())
                 );
             }else if(args[1].equalsIgnoreCase("version")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefixMsg() + "&b&lThis version is:&3&l " + plugin.getDescription().getVersion()));
+                        plugin.getMainConfigManager().getPrefix() + "&b&lThis version is:&3&l " + plugin.getDescription().getVersion()));
             }else {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getErrorArgumentOfGet()));
