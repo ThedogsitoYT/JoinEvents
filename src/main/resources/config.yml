@@ -1,19 +1,19 @@
 Config:
   #prefix that you can use with %prefix%
-  Prefix: '&3&l[&b&lJoinEvents&3&l]'
+  Prefix: '&b&lJoinEvents &3&l>>'
   Join:
     WelcomeMessage:
       #define if the welcome text is activated you can use "true/false"
       Enabled: true
       #defines the text of the welcome message
       Text:
-        - '&8&m&l+---------------------------------------+'
-        - '                      &a&lWelcome %player%'
+        - '&3&m&l+---------------------------------------+'
+        - '                      &bWelcome &b&l%player%'
         - ' '
         - '     &c&lYoutube: &cYour Youtube'
         - '        &3&lTwitter/x: &bYour twitter'
         - '           &b&l¡Visit our store mc.example.net!'
-        - '&8&m&l+---------------------------------------+'
+        - '&3&m&l+---------------------------------------+'
     TextForRank:
       #define if the welcome text for those who have permits is activated you can use "true/false"
       Enabled: true
@@ -43,8 +43,8 @@ Config:
     Titles:
       #define if the welcome text for those who have permits is activated you can use "true/false
       Enabled: true
-      Title: '&b&lWelcome %player%!'
-      SubTitle: '&b&lThanks for enter to the server'
+      Title: '&bWelcome &3&l%player%!'
+      SubTitle: '&bThanks for enter to the server'
   Commands:
     Hub:
       SecondsWait: 3
@@ -53,27 +53,27 @@ Config:
 Messages:
   Errors:
     #defines the error of "not permissions"
-    NotPermission: '%prefix% &c&lYou do not have permissions to run this command'
+    NotPermission: '%prefix% &cYou do not have permissions to run this command'
     #defines the error of "not exist"
-    NotExist: '%prefix% &c&lThat command does not exist use /je help'
+    NotExist: '%prefix% &cThat command does not exist use /je help'
     #defines the error of "error argument of get"
-    ErrorArgumentOfGet: '%prefix% &c&lPlease use <version/author>'
+    ErrorArgumentOfGet: '%prefix% &cPlease use <version/author>'
   #defines message of reload
-  Reload: '%prefix% &b&lThe plugin was successfully reloaded'
+  Reload: '%prefix% &bThe plugin was successfully reloaded'
   #defines message of hub and warp
-  SetHub: '%prefix% &b&lThe hub is setted in %cords%'
-  DelHub: '%prefix% &c&lThe hub &c&lis deleted'
-  SetWarp: '%prefix% &b&lThe warp &3&l"%name%"&b&l is setted in %cords%'
-  DelWarp: '%prefix% &c&lThe warp &6&l"%name%" &c&lis deleted'
+  SetHub: '%prefix% &bThe hub is setted in %cords%'
+  DelHub: '%prefix% &cThe hub &c&lis deleted'
+  SetWarp: '%prefix% &bThe warp &3&l"%name%&3&l"&b&l is setted in %cords%'
+  DelWarp: '%prefix% &cThe warp &6&l"%name%&6&l"&c&l is deleted'
   #defines message of hub
   Hub:
-    HubTeleporting: '%prefix% &b&lTeleporting hub in %wait%...'
-    HubTeleported: '%prefix% &b&lTeleported to the hub'
-    NotExistingHub: '%prefix% &c&lNot existing hub'
+    HubTeleporting: '%prefix% &bTeleporting hub in %wait%...'
+    HubTeleported: '%prefix% &bTeleported to the hub'
+    NotExistingHub: '%prefix% &cNot existing hub'
   #defines message of warps
   Warps:
-    WarpTeleporting: '%prefix% &b&lTeleporting to the warp %name% in %wait%...'
-    WarpTeleported: '%prefix% &b&lTeleported to the warp %name%'
-    WarpError: '%prefix% &c&lPlease use the command /setwarp <name>'
-    WarpError2: '%prefix% &c&lPlease use the command /delwarp <name>'
-    NotExistingWarp: '%prefix% &c&lThat warp does not exist or you did not enter a name use: /warp <name>'
+    WarpTeleporting: '%prefix% &bTeleporting to the warp &3&l"%name%&3&l" &b&lin %wait%...'
+    WarpTeleported: '%prefix% &bTeleported to the warp &3&l"%name%&3&l"'
+    WarpError: '%prefix% &cPlease use the command /setwarp <name>'
+    WarpError2: '%prefix% &cPlease use the command /delwarp <name>'
+    NotExistingWarp: '%prefix% &cThat warp does not exist or you did not enter a name use: /warp <name>'

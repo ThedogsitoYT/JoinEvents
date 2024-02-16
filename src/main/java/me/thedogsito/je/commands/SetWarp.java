@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
+import java.util.Formatter;
 
 public class SetWarp implements CommandExecutor {
     private final Main plugin;
@@ -57,12 +58,49 @@ public class SetWarp implements CommandExecutor {
             String pitch = String.valueOf(f.format(Pitch));
             String world = l.getWorld().getName();
 
-            config.set("Config.Commands.Warps." + Name + ".X", x);
-            config.set("Config.Commands.Warps." + Name + ".Y", y);
-            config.set("Config.Commands.Warps." + Name + ".Z", z);
-            config.set("Config.Commands.Warps." + Name + ".Yaw", yaw);
-            config.set("Config.Commands.Warps." + Name + ".Pitch", pitch);
-            config.set("Config.Commands.Warps." + Name + ".World", world);
+            String LowerCaseName = Name.toLowerCase();
+            String CodeName = LowerCaseName
+                    .replace("&0", "")
+                    .replace("&1", "")
+                    .replace("&2", "")
+                    .replace("&3", "")
+                    .replace("&4", "")
+                    .replace("&5", "")
+                    .replace("&6", "")
+                    .replace("&7", "")
+                    .replace("&8", "")
+                    .replace("&9", "")
+                    .replace("&a", "")
+                    .replace("&b", "")
+                    .replace("&c", "")
+                    .replace("&d", "")
+                    .replace("&e", "")
+                    .replace("&f", "")
+
+                    .replace("&k", "")
+                    .replace("&l", "")
+                    .replace("&m", "")
+                    .replace("&n", "")
+                    .replace("&o", "")
+                    .replace("&r", "");
+
+            if (!(Name.contains("&"))) {
+                config.set("Config.Commands.Warps." + CodeName + ".Name", "&b&l" + Name);
+                config.set("Config.Commands.Warps." + CodeName + ".X", x);
+                config.set("Config.Commands.Warps." + CodeName + ".Y", y);
+                config.set("Config.Commands.Warps." + CodeName + ".Z", z);
+                config.set("Config.Commands.Warps." + CodeName + ".Yaw", yaw);
+                config.set("Config.Commands.Warps." + CodeName + ".Pitch", pitch);
+                config.set("Config.Commands.Warps." + CodeName + ".World", world);
+            }else {
+                config.set("Config.Commands.Warps." + CodeName + ".Name", Name);
+                config.set("Config.Commands.Warps." + CodeName + ".X", x);
+                config.set("Config.Commands.Warps." + CodeName + ".Y", y);
+                config.set("Config.Commands.Warps." + CodeName + ".Z", z);
+                config.set("Config.Commands.Warps." + CodeName + ".Yaw", yaw);
+                config.set("Config.Commands.Warps." + CodeName + ".Pitch", pitch);
+                config.set("Config.Commands.Warps." + CodeName + ".World", world);
+            }
 
             sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getSetWarp()
                     .replace("%prefix%", plugin.getMainConfigManager().getPrefix())

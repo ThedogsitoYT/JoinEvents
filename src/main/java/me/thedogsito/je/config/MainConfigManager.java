@@ -70,13 +70,13 @@ public class MainConfigManager {
         TeleportingHub = config.getString("Messages.Hub.HubTeleporting").replace("%prefix%", getPrefix());
         HubTeleported = config.getString("Messages.Hub.HubTeleported").replace("%prefix%", getPrefix());
         NotExistingHub = config.getString("Messages.Hub.NotExistingHub").replace("%prefix%", getPrefix());
-        WarpTeleporting = config.getString("Messages.Warps.WarpTeleporting"); //ponerle el prefix cuando se haga el /warp
-        WarpTeleported = config.getString("Messages.Warps.WarpTeleported"); //ponerle el prefix cuando se haga el /warp
-        WarpError = config.getString("Messages.Warps.WarpError");
-        NotExistingWarp = config.getString("Messages.Warps.NotExistingWarp"); //ponerle el prefix cuando se haga el /warp
+        WarpTeleporting = config.getString("Messages.Warps.WarpTeleporting").replace("%prefix%", getPrefix());
+        WarpTeleported = config.getString("Messages.Warps.WarpTeleported").replace("%prefix%", getPrefix());
+        WarpError = config.getString("Messages.Warps.WarpError").replace("%prefix%", getPrefix());
+        NotExistingWarp = config.getString("Messages.Warps.NotExistingWarp").replace("%prefix%", getPrefix());
 
         HubTeleportingSeconds = config.getInt("Config.Commands.Hub.SecondsWait");
-        WarpTeleportingSeconds = config.getInt("Config.Commands.Warp.SecondsWait");
+        WarpTeleportingSeconds = config.getInt("Config.Commands.Warps.SecondsWait");
     }
 
     public String getWarpError() {

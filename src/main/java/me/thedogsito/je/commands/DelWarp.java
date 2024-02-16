@@ -35,6 +35,7 @@ public class DelWarp implements CommandExecutor {
 
                 if (config.contains("Config.Commands.Warps." + Name)) {
                     config.set("Config.Commands.Warps." + Name, null);
+                    config.set("Config.Commands.Warps." + Name + ".Name", null);
                     config.set("Config.Commands.Warps." + Name + ".X", null);
                     config.set("Config.Commands.Warps." + Name + ".Y", null);
                     config.set("Config.Commands.Warps." + Name + ".Z", null);
@@ -48,7 +49,7 @@ public class DelWarp implements CommandExecutor {
                     plugin.saveConfig();
                     return true;
                 } else {
-                    sender.sendMessage("No existe XDD");
+                    sender.sendMessage(plugin.getMainConfigManager().getNotExistingWarp());
                     return true;
                 }
             }
@@ -58,7 +59,7 @@ public class DelWarp implements CommandExecutor {
         FileConfiguration config = plugin.getConfig();
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.setwarp" + "je.*")) {
+        if (!p.hasPermission("je.delwarp" + "je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
                             .replace("%player%", p.getName())));
@@ -70,16 +71,18 @@ public class DelWarp implements CommandExecutor {
                     .replace("%prefix%", config.getString("Config.Prefix"))));
             return true;
         } else if (args.length >= 1) {
-            String Name = args[0];
+            String CodeName = args[0].toLowerCase();
+            String Name = config.getString("Config.Commands.Warps." + CodeName + ".Name");
 
-            if (config.contains("Config.Commands.Warps." + Name)) {
-                config.set("Config.Commands.Warps." + Name, null);
-                config.set("Config.Commands.Warps." + Name + ".X", null);
-                config.set("Config.Commands.Warps." + Name + ".Y", null);
-                config.set("Config.Commands.Warps." + Name + ".Z", null);
-                config.set("Config.Commands.Warps." + Name + ".Yaw", null);
-                config.set("Config.Commands.Warps." + Name + ".Pitch", null);
-                config.set("Config.Commands.Warps." + Name + ".World", null);
+            if (config.contains("Config.Commands.Warps." + CodeName)) {
+                config.set("Config.Commands.Warps." + CodeName, null);
+                config.set("Config.Commands.Warps." + CodeName + ".Name", null);
+                config.set("Config.Commands.Warps." + CodeName + ".X", null);
+                config.set("Config.Commands.Warps." + CodeName + ".Y", null);
+                config.set("Config.Commands.Warps." + CodeName + ".Z", null);
+                config.set("Config.Commands.Warps." + CodeName + ".Yaw", null);
+                config.set("Config.Commands.Warps." + CodeName + ".Pitch", null);
+                config.set("Config.Commands.Warps." + CodeName + ".World", null);
 
                 sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getDelWarp()
                         .replace("%prefix%", plugin.getMainConfigManager().getPrefix())
@@ -87,7 +90,8 @@ public class DelWarp implements CommandExecutor {
                 plugin.saveConfig();
                 return true;
             }else {
-                sender.sendMessage("No existe XDD");
+
+                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingWarp()));
                 return true;
             }
         }
