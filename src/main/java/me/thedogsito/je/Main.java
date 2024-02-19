@@ -25,14 +25,23 @@ public class Main extends JavaPlugin {
         mainConfigManager = new MainConfigManager(this);
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)"));
+        updateChecker();
         registerEvents();
         registerCommands();
-        updateChecker();
     }
 
     public void onDisable() {
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lGood bay :)"));
+    }
+
+    public boolean isFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
     }
 
     public void registerCommands() {
@@ -53,25 +62,27 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new TeleportHub(this), this);
     }
 
-    public void updateChecker(){
+    public void updateChecker() {
         try {
-            HttpURLConnection con = (HttpURLConnection) new URL(
-                    "https://raw.githubusercontent.com/ThedogsitoYT/JoinEvents/master/VersionController").openConnection();
-            int timed_out = 1250;
-            con.setConnectTimeout(timed_out);
-            con.setReadTimeout(timed_out);
-            latestversion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
-            if (latestversion.length() <= 7) {
-                if(!version.equals(latestversion)){
+            URL url = new URL("https://raw.githubusercontent.com/ThedogsitoYT/JoinEvents/master/VersionController");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setConnectTimeout(1250);
+            con.setReadTimeout(1250);
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                latestversion = reader.readLine();
+                if (latestversion != null && !getVersion().equals(latestversion)) {
+                    // Actualización disponible
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                             "&b&lJoinEvents &3&l>> &c&lThere is a new version available."));
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                            "&b&lJoinEvents &3&l>> &b&lYou can dowload in: https://hangar.papermc.io/ThedogsitoYT/JoinEvents/versions"));
+                            "&b&lJoinEvents &3&l>> &c&lYou can download it at: &b&lhttps://hangar.papermc.io/ThedogsitoYT/JoinEvents/versions"));
                 }
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                    "&b&lJoinEvents &3&l>> &c&lError while checking update."));
+                    "&b&lJoinEvents &3&l>> &c&lError while checking for updates."));
         }
     }
 

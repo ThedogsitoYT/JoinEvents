@@ -1,5 +1,6 @@
 package me.thedogsito.je.commands;
 
+import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
 import me.thedogsito.je.utils.UpdateDownloader;
@@ -14,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Je implements CommandExecutor {
     private Main plugin;
-    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.6-BETA/PAPER/JoinEvents.jar";
+    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.7-BETA/PAPER/JoinEvents.jar";
     public Je(Main plugin) {
         this.plugin = plugin;
     }
@@ -98,30 +99,39 @@ public class Je implements CommandExecutor {
                                 .replace("%player%", p.getName())));
                 return;
             }
-            startUpdateActionBar(p);
+
+            if (plugin.isFolia()) {
+                sender.sendMessage(MessageUtil.GetColoredMessages(
+                        "&b&lJoinEvents &3&l>> &cFor now it is not for folia. you will have to update manually"));
+                return;
+            }
+
+            if (plugin.getVersion().equals(plugin.getLatestversion())) {
+                p.sendActionBar(MessageUtil.GetColoredMessages("&4&l[&c&lYou are in the latest version&4&l]"));
+                p.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &cYou are in the latest version"));
+            }else {
+                startUpdateActionBar(p);
+            }
         } else {
-            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console"));
+            sender.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &cThis command not support on console"));
         }
     }
 
     // Updater functions
-    private void startUpdateActionBar(Player player) {
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Descargando actualización..."));
+    private void startUpdateActionBar(Player p) {
+        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&lDowloading update&3&l]"));
+        p.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>>" +
+                " &bDowloading update"));
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                UpdateActionBar(player);
+                UpdateActionBar(p);
             }
         }.runTaskLater(plugin, 1L);
     }
 
-    private void UpdateActionBar(Player player) {
-        if (plugin.getVersion().equalsIgnoreCase(plugin.getLatestversion())) {
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                    MessageUtil.GetColoredMessages("&4&l[&c&lYou are in the latest version&4&l]")));
-            return;
-        }
+    private void UpdateActionBar(Player p) {
         new BukkitRunnable() {
             double progress = 0.0;
 
@@ -130,60 +140,50 @@ public class Je implements CommandExecutor {
                 if (progress <= 1.0) {
                     int percentage = (int) (progress * 100);
 
-                    downloadAndUpdate(player);
+                    downloadAndUpdate(p);
 
-                    if (percentage >= 0) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&7----------&3&l] &b&l" + percentage + "&3&l%")));
+                    if (percentage >= 2) {
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&7----------&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 10) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l-&7---------&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-&7---------&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 20) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l--&7--------&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l--&7--------&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 30) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l---&7-------&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l---&7-------&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 40) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l----&7------&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l----&7------&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 50) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l-----&7-----&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-----&7-----&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 60) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l------&7----&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l------&7----&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 70) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l-------&7---&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-------&7---&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 80) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l--------&7--&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l--------&7--&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 90) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                                MessageUtil.GetColoredMessages("&3&l[&b&l---------&7-&3&l] &b&l" + percentage + "&3&l%")));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l---------&7-&3&l] &b&l" + percentage + "&3&l%"));
                     }
 
                     if (percentage >= 100) {
-                        stopUpdateActionBar(player);
+                        stopUpdateActionBar(p);
                         this.cancel();
                         System.out.println("Update completed.");
                     }
@@ -192,7 +192,7 @@ public class Je implements CommandExecutor {
                     System.out.println("Progress: " + percentage + "%");
 
                 } else {
-                    stopUpdateActionBar(player);
+                    stopUpdateActionBar(p);
                     this.cancel();
                     System.out.println("Update completed.");
                 }
@@ -211,11 +211,10 @@ public class Je implements CommandExecutor {
         }.runTaskAsynchronously(plugin);
     }
 
-    private void stopUpdateActionBar(Player player) {
+    private void stopUpdateActionBar(Player p) {
         Bukkit.getScheduler().runTask(plugin, () -> {
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(
-                    MessageUtil.GetColoredMessages("&3&l[&b&lThe update is downloaded&3&l]")));
-            player.sendMessage(MessageUtil.GetColoredMessages(
+            p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&lThe update is downloaded&3&l]"));
+            p.sendMessage(MessageUtil.GetColoredMessages(
                     "&b&lJoinEvents &3&l>> &b&lThe update is downloaded. please restart your server"));
         });
     }

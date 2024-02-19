@@ -77,3 +77,6 @@ Messages:
     WarpError: '%prefix% &cPlease use the command /setwarp <name>'
     WarpError2: '%prefix% &cPlease use the command /delwarp <name>'
     NotExistingWarp: '%prefix% &cThat warp does not exist or you did not enter a name use: /warp <name>'
+    WarpListLineOne: '&3&m&l-----------------'
+    WarpListLineTwo: '&3&m&l-----------------'
+    WarpListUpText: '&b&l        Warps'

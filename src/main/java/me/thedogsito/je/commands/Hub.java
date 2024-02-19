@@ -1,6 +1,6 @@
 package me.thedogsito.je.commands;
 
-import com.google.common.util.concurrent.AbstractScheduledService;
+import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
 import org.bukkit.Location;
@@ -49,6 +49,21 @@ public class Hub implements CommandExecutor {
             double z = Double.valueOf(config.getString("Config.Commands.Hub.Z").replace(',', '.')).doubleValue();
             float yaw = Float.valueOf(config.getString("Config.Commands.Hub.Yaw").replace(',', '.')).floatValue();
             float pitch = Float.valueOf(config.getString("Config.Commands.Hub.Pitch").replace(',', '.')).floatValue();
+
+            if (plugin.isFolia()) {
+                ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                RegionScheduler scheduler = plugin.getServer().getRegionScheduler();
+                World world = plugin.getServer().getWorld(config.getString("Config.Commands.Hub.World"));
+                Location l = new Location(world, x, y, z, yaw, pitch);
+                executor.schedule(() -> {
+                    scheduler.execute(plugin, l, () -> {
+                        p.teleportAsync(l).thenRunAsync(() -> {
+                            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleported()));
+                        });
+                    });
+                }, WaitingSeconds, TimeUnit.SECONDS);
+                return true;
+            }
 
             BukkitScheduler scheduler = plugin.getServer().getScheduler();
             scheduler.runTaskLater(plugin, () -> {

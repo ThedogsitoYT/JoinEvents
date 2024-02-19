@@ -2,18 +2,11 @@ package me.thedogsito.je.commands;
 
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class DelWarp implements CommandExecutor {
     private final Main plugin;
