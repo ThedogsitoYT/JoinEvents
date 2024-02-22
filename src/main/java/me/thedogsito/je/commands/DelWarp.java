@@ -19,6 +19,15 @@ public class DelWarp implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
             FileConfiguration config = plugin.getConfig();
+            Player p = (Player) sender;
+
+            if (!p.hasPermission("je.delwarp" + "je.*")) {
+                sender.sendMessage(MessageUtil.GetColoredMessages(
+                        plugin.getMainConfigManager().getNotPermission()
+                                .replace("%player%", p.getName())));
+                return true;
+            }
+
             if (!(args.length >= 1)) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpError2")
                         .replace("%prefix%", config.getString("Config.Prefix"))));

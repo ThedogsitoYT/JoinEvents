@@ -19,6 +19,14 @@ public class DelHub implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
             FileConfiguration config = plugin.getConfig();
+            Player p = (Player) sender;
+
+            if (!p.hasPermission("je.delhub" + "je.*")) {
+                sender.sendMessage(MessageUtil.GetColoredMessages(
+                        plugin.getMainConfigManager().getNotPermission()
+                                .replace("%player%", p.getName())));
+                return true;
+            }
 
             if (config.contains("Config.Commands.Hub.X")) {
                 config.set("Config.Commands.Hub.X", null);

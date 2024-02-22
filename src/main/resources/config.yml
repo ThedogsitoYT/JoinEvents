@@ -36,15 +36,18 @@ Config:
         - '&4&l[&c&l-&4&l] &6&lMvp+ &6&l%player%'
       #defines the sound when someone with permission join
       SoundsJoin:
-        -
-        -
-        -
-        -
+        - LEVEL_UP;10;2
+        - LEVEL_UP;10;2
+        - NOTE_PLING;10;2
+        - NOTE_PLING;10;2
     Titles:
       #define if the welcome text for those who have permits is activated you can use "true/false
       Enabled: true
       Title: '&bWelcome &3&l%player%!'
       SubTitle: '&bThanks for enter to the server'
+    BossBar:
+      Enabled: true
+      Text: '&b&lWelcome &3&l%player%'
   Commands:
     Hub:
       SecondsWait: 3

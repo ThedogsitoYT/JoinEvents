@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Je implements CommandExecutor {
     private Main plugin;
-    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.7-BETA/PAPER/JoinEvents.jar";
+    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.8-BETA/PAPER/JoinEvents.jar";
     public Je(Main plugin) {
         this.plugin = plugin;
     }
@@ -97,6 +97,12 @@ public class Je implements CommandExecutor {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName())));
+                return;
+            }
+
+            if (Bukkit.getServer().getVersion().contains("1.8")) {
+                sender.sendMessage(MessageUtil.GetColoredMessages(
+                        "&b&lJoinEvents &3&l>> &cFor now it is not for 1.8. you will have to update manually"));
                 return;
             }
 

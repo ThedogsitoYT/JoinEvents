@@ -26,7 +26,7 @@ public class WarpList implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.listwarp" + "je.*")) {
+            if (!p.hasPermission("je.warplist" + "je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName())));

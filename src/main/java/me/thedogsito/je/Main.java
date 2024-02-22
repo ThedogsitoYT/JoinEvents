@@ -2,10 +2,7 @@ package me.thedogsito.je;
 
 import me.thedogsito.je.commands.*;
 import me.thedogsito.je.config.MainConfigManager;
-import me.thedogsito.je.listeners.JoinMessageListener;
-import me.thedogsito.je.listeners.JoinTitlesListener;
-import me.thedogsito.je.listeners.TeleportHub;
-import me.thedogsito.je.listeners.TextPermissionsListener;
+import me.thedogsito.je.listeners.*;
 import me.thedogsito.je.utils.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -58,6 +55,7 @@ public class Main extends JavaPlugin {
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new JoinMessageListener(this), this);
         getServer().getPluginManager().registerEvents(new JoinTitlesListener(this), this);
+        getServer().getPluginManager().registerEvents(new JoinBossbarListener(this), this);
         getServer().getPluginManager().registerEvents(new TextPermissionsListener(this), this);
         getServer().getPluginManager().registerEvents(new TeleportHub(this), this);
     }

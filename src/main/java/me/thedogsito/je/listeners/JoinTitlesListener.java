@@ -20,10 +20,6 @@ public class JoinTitlesListener implements Listener {
         MainConfigManager mainConfigManager = plugin.getMainConfigManager();
 
         if(mainConfigManager.isTitleEnabled()) {
-            if(!p.hasPermission("je.get" + "je.*")) {
-                return;
-            }
-
 
             String Title = mainConfigManager.getTitle().replace("%player%", p.getName());
             String SubTitle = mainConfigManager.getSubTitle().replace("%player%", p.getName());
