@@ -55,9 +55,11 @@ public class Main extends JavaPlugin {
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new JoinMessageListener(this), this);
         getServer().getPluginManager().registerEvents(new JoinTitlesListener(this), this);
-        getServer().getPluginManager().registerEvents(new JoinBossbarListener(this), this);
+        getServer().getPluginManager().registerEvents(new JoinActionBarListener(this), this);
+        getServer().getPluginManager().registerEvents(new FireworksJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new TextPermissionsListener(this), this);
         getServer().getPluginManager().registerEvents(new TeleportHub(this), this);
+        getServer().getPluginManager().registerEvents(new IpProtect(this), this);
     }
 
     public void updateChecker() {
@@ -70,7 +72,7 @@ public class Main extends JavaPlugin {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
                 latestversion = reader.readLine();
                 if (latestversion != null && !getVersion().equals(latestversion)) {
-                    // Actualización disponible
+
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                             "&b&lJoinEvents &3&l>> &c&lThere is a new version available."));
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
@@ -78,7 +80,6 @@ public class Main extends JavaPlugin {
                 }
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
             Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                     "&b&lJoinEvents &3&l>> &c&lError while checking for updates."));
         }

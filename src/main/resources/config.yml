@@ -1,6 +1,12 @@
 Config:
   #prefix that you can use with %prefix%
   Prefix: '&b&lJoinEvents &3&l>>'
+  IpsProtected:
+    Ips:
+      - 0.0.0.0
+    Names:
+      - 'Thedogsito'
+    KickMessage: '&c&lYou can not enter because this account is protected by ip'
   Join:
     WelcomeMessage:
       #define if the welcome text is activated you can use "true/false"
@@ -45,14 +51,27 @@ Config:
       Enabled: true
       Title: '&bWelcome &3&l%player%!'
       SubTitle: '&bThanks for enter to the server'
-    BossBar:
+    #defines what the actionbar will be like
+    ActionBar:
       Enabled: true
       Text: '&b&lWelcome &3&l%player%'
+    Fireworks:
+      #The options to set are: ball, ball_large, star, burst, creeper
+      Types:
+        - creeper
+      #You can put any color but remember that it has to be a decimal color code and with the #
+      Colors:
+        - '#4444'
+        - '#00fff5'
   Commands:
     Hub:
       SecondsWait: 3
     Warps:
       SecondsWait: 3
+    OnConsoleJoin:
+      Enabled: false
+      Commands:
+        - 'gamemode survival %player%'
 Messages:
   Errors:
     #defines the error of "not permissions"

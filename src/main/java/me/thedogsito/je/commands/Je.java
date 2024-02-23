@@ -1,21 +1,19 @@
 package me.thedogsito.je.commands;
 
-import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
 import me.thedogsito.je.utils.UpdateDownloader;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Je implements CommandExecutor {
     private Main plugin;
-    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.8-BETA/PAPER/JoinEvents.jar";
+    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.0-RC1/PAPER/JoinEvents.jar";
     public Je(Main plugin) {
         this.plugin = plugin;
     }
@@ -72,6 +70,7 @@ public class Je implements CommandExecutor {
 
     //Reload
     public void reload(CommandSender sender) {
+        FileConfiguration config = this.plugin.getConfig();
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if(!p.hasPermission("je.reload" + "je.*")) {
@@ -80,11 +79,11 @@ public class Je implements CommandExecutor {
                                 .replace("%player%", p.getName())));
                 return;
             }
-            plugin.getMainConfigManager().reloadConfig();
+            this.plugin.reloadConfig();
             sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getReload()
                     .replace("%player%", p.getName())));
         }else{
-            plugin.getMainConfigManager().reloadConfig();
+            this.plugin.reloadConfig();
             sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getReload()));
         }
     }

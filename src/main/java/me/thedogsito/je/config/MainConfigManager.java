@@ -36,8 +36,8 @@ public class MainConfigManager {
     private String WarpError;
     private String SetWarp;
     private String DelWarp;
-    private Boolean BossbarEnabled;
-    private String BossbarText;
+    private Boolean ActionBarEnabled;
+    private String ActionBarText;
 
     public MainConfigManager(Main plugin) {
         this.plugin = plugin;
@@ -59,11 +59,11 @@ public class MainConfigManager {
         WelcomeMessageEnabled = config.getBoolean("Config.Join.WelcomeMessage.Enabled");
         TitleEnabled = config.getBoolean("Config.Join.Titles.Enabled");
         MessageWithPermissionEnabled = config.getBoolean("Config.Join.TextForRank.Enabled");
-        BossbarEnabled = config.getBoolean("Config.Join.BossBar.Enabled");
+        ActionBarEnabled = config.getBoolean("Config.Join.ActionBar.Enabled");
 
         Title = config.getString("Config.Join.Titles.Title").replace("%prefix%", getPrefix());
         SubTitle = config.getString("Config.Join.Titles.SubTitle").replace("%prefix%", getPrefix());
-        BossbarText = config.getString("Config.Join.BossBar.Text").replace("%prefix%", getPrefix());
+        ActionBarText = config.getString("Config.Join.ActionBar.Text").replace("%prefix%", getPrefix());
 
         NotPermission = config.getString("Messages.Errors.NotPermission").replace("%prefix%", getPrefix());
         ErrorArgumentOfGet = config.getString("Messages.Errors.ErrorArgumentOfGet").replace("%prefix%", getPrefix());
@@ -84,12 +84,12 @@ public class MainConfigManager {
         WarpTeleportingSeconds = config.getInt("Config.Commands.Warps.SecondsWait");
     }
 
-    public String getBossbarText() {
-        return BossbarText;
+    public String getActionBarText() {
+        return ActionBarText;
     }
 
-    public Boolean isBossbarEnabled() {
-        return BossbarEnabled;
+    public Boolean isActionBarEnabled() {
+        return ActionBarEnabled;
     }
 
     public String getWarpError() {
