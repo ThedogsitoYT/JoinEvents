@@ -27,14 +27,14 @@ public class JoinMessageListener implements Listener {
         if(mainConfigManager.isWelcomeMessageEnabled()) {
             List<String> message = mainConfigManager.getWelcomeMessageText();
             for(String m : message) {
-                p.sendMessage(MessageUtil.GetColoredMessages(m)
+                p.sendMessage(MessageUtil.GetColoredMessages(m, p)
                         .replace("%player%", p.getName()));
             }
         }
 
         if (plugin.isFolia()) {
             Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                    "&b&lJoinEvents &3&l>> &cThis commands on join do not support a folia"));
+                    "&b&lJoinEvents &3&l>> &cThis commands on join do not support a folia", p));
             return;
         }
 

@@ -59,10 +59,10 @@ public class UpdateDownloader {
                 int percentage = (int) (progress * 100);
             }
 
-            Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &b&lDowloading &3&l" + fileName));
+            Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &b&lDowloading &3&l" + fileName, null));
 
         } catch (IOException e) {
-            throw new IOException(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &c&lError 403"));
+            throw new IOException(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &c&lError 403", null));
         }
     }
 

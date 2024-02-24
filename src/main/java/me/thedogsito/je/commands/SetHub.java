@@ -21,16 +21,16 @@ public class SetHub implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console"));
+            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console", null));
             return true;
         }
         FileConfiguration config = plugin.getConfig();
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.sethub" + "je.*")) {
+        if (!p.hasPermission("je.sethub") && !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
             return true;
         }
 
@@ -59,7 +59,7 @@ public class SetHub implements CommandExecutor {
         plugin.saveConfig();
 
         sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getSetHub()
-                .replace("%cords%", x + " " + y + " " + z)));
+                .replace("%cords%", x + " " + y + " " + z), p));
         return true;
     }
 }

@@ -87,7 +87,7 @@ public class FireworksJoinListener implements Listener {
             return Color.fromRGB(awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue());
         } catch (NumberFormatException e) {
             Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> " +
-                    "&c&lInvalid firework color: " + colorName + " does not exist"));
+                    "&c&lInvalid firework color: " + colorName + " does not exist", null));
         }
         return null;
     }
@@ -99,7 +99,7 @@ public class FireworksJoinListener implements Listener {
             return FireworkEffect.Type.valueOf(typeName.toUpperCase());
         } catch (IllegalArgumentException e) {
             Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> " +
-                    "&c&lThis effect: " + typeName + " does not exist"));
+                    "&c&lThis effect: " + typeName + " does not exist", null));
         }
         return null;
     }

@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Je implements CommandExecutor {
     private Main plugin;
-    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.0-RC1/PAPER/JoinEvents.jar";
+    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.0-RC2/PAPER/JoinEvents.jar";
     public Je(Main plugin) {
         this.plugin = plugin;
     }
@@ -45,46 +45,45 @@ public class Je implements CommandExecutor {
     public void help(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if(!p.hasPermission("je.help" + "je.*")) {
+            if (!p.hasPermission("je.help") && !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), p));
                 return;
             }
         }
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l----------JoinEvents commands----------"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje reload"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje get <version/author>"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje update"));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l----------JoinEvents commands----------", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje reload", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje get <version/author>", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje update", null));
         sender.sendMessage(" ");
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lfly (no added)"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lhub"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lsethub"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&ldelhub"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lwarp"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lsetwarp"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&ldelwarp"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lwarplist"));
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l---------------------------------------"));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lfly (no added)", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lhub", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lsethub", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&ldelhub", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lwarp", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lsetwarp", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&ldelwarp", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lwarplist", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l---------------------------------------", null));
     }
 
     //Reload
     public void reload(CommandSender sender) {
-        FileConfiguration config = this.plugin.getConfig();
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if(!p.hasPermission("je.reload" + "je.*")) {
+            if (!p.hasPermission("je.reload") && !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), p));
                 return;
             }
-            this.plugin.reloadConfig();
+            plugin.getMainConfigManager().reloadConfig();
             sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getReload()
-                    .replace("%player%", p.getName())));
+                    .replace("%player%", p.getName()), p));
         }else{
-            this.plugin.reloadConfig();
-            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getReload()));
+            plugin.getMainConfigManager().reloadConfig();
+            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getReload(), null));
         }
     }
 
@@ -92,41 +91,41 @@ public class Je implements CommandExecutor {
     public void updater(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.update" + "je.*")) {
+            if (!p.hasPermission("je.update") && !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), p));
                 return;
             }
 
             if (Bukkit.getServer().getVersion().contains("1.8")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        "&b&lJoinEvents &3&l>> &cFor now it is not for 1.8. you will have to update manually"));
+                        "&b&lJoinEvents &3&l>> &cFor now it is not for 1.8. you will have to update manually", null));
                 return;
             }
 
             if (plugin.isFolia()) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        "&b&lJoinEvents &3&l>> &cFor now it is not for folia. you will have to update manually"));
+                        "&b&lJoinEvents &3&l>> &cFor now it is not for folia. you will have to update manually", null));
                 return;
             }
 
             if (plugin.getVersion().equals(plugin.getLatestversion())) {
-                p.sendActionBar(MessageUtil.GetColoredMessages("&4&l[&c&lYou are in the latest version&4&l]"));
-                p.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &cYou are in the latest version"));
+                p.sendActionBar(MessageUtil.GetColoredMessages("&4&l[&c&lYou are in the latest version&4&l]", null));
+                p.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &cYou are in the latest version", null));
             }else {
                 startUpdateActionBar(p);
             }
         } else {
-            sender.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &cThis command not support on console"));
+            sender.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &cThis command not support on console", null));
         }
     }
 
     // Updater functions
     private void startUpdateActionBar(Player p) {
-        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&lDowloading update&3&l]"));
+        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&lDowloading update&3&l]", null));
         p.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>>" +
-                " &bDowloading update"));
+                " &bDowloading update", null));
 
         new BukkitRunnable() {
             @Override
@@ -148,43 +147,43 @@ public class Je implements CommandExecutor {
                     downloadAndUpdate(p);
 
                     if (percentage >= 2) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&7----------&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&7----------&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 10) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-&7---------&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-&7---------&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 20) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l--&7--------&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l--&7--------&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 30) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l---&7-------&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l---&7-------&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 40) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l----&7------&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l----&7------&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 50) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-----&7-----&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-----&7-----&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 60) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l------&7----&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l------&7----&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 70) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-------&7---&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l-------&7---&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 80) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l--------&7--&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l--------&7--&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 90) {
-                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l---------&7-&3&l] &b&l" + percentage + "&3&l%"));
+                        p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&l---------&7-&3&l] &b&l" + percentage + "&3&l%", null));
                     }
 
                     if (percentage >= 100) {
@@ -218,9 +217,9 @@ public class Je implements CommandExecutor {
 
     private void stopUpdateActionBar(Player p) {
         Bukkit.getScheduler().runTask(plugin, () -> {
-            p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&lThe update is downloaded&3&l]"));
+            p.sendActionBar(MessageUtil.GetColoredMessages("&3&l[&b&lThe update is downloaded&3&l]", null));
             p.sendMessage(MessageUtil.GetColoredMessages(
-                    "&b&lJoinEvents &3&l>> &b&lThe update is downloaded. please restart your server"));
+                    "&b&lJoinEvents &3&l>> &b&lThe update is downloaded. please restart your server", null));
         });
     }
 
@@ -228,49 +227,49 @@ public class Je implements CommandExecutor {
     public void subCommandGet(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if(!p.hasPermission("je.get" + "je.*")) {
+            if (!p.hasPermission("je.get") && !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), p));
                 return;
             }
 
             if(args.length == 1) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getErrorArgumentOfGet()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), p));
                 return;
             }
 
             if(args[1].equalsIgnoreCase("author")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefix() + " &b&lThis author is:&3&l " + plugin.getDescription().getAuthors())
+                        plugin.getMainConfigManager().getPrefix() + " &b&lThis author is:&3&l " + plugin.getDescription().getAuthors(), null)
                 );
             }else if(args[1].equalsIgnoreCase("version")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefix() + " &b&lThis version is:&3&l " + plugin.getDescription().getVersion()));
+                        plugin.getMainConfigManager().getPrefix() + " &b&lThis version is:&3&l " + plugin.getDescription().getVersion(), null));
             }else {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getErrorArgumentOfGet()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), null));
             }
         }else{
             if(args.length == 1) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getErrorArgumentOfGet()));
+                        plugin.getMainConfigManager().getErrorArgumentOfGet(), null));
                 return;
             }
 
             if(args[1].equalsIgnoreCase("author")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefix() + "&b&lThis author is:&3&l " + plugin.getDescription().getAuthors())
+                        plugin.getMainConfigManager().getPrefix() + "&b&lThis author is:&3&l " + plugin.getDescription().getAuthors(), null)
                 );
             }else if(args[1].equalsIgnoreCase("version")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getPrefix() + "&b&lThis version is:&3&l " + plugin.getDescription().getVersion()));
+                        plugin.getMainConfigManager().getPrefix() + "&b&lThis version is:&3&l " + plugin.getDescription().getVersion(), null));
             }else {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getErrorArgumentOfGet()));
+                        plugin.getMainConfigManager().getErrorArgumentOfGet(), null));
             }
         }
     }
@@ -279,18 +278,18 @@ public class Je implements CommandExecutor {
     public void error(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if(!p.hasPermission("je.error" + "je.*")) {
+            if (!p.hasPermission("je.error") && !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
+                                .replace("%player%", p.getName()), p));
                 return;
             }
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotExist()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
         }else{
             sender.sendMessage(MessageUtil.GetColoredMessages(
-                    plugin.getMainConfigManager().getNotExist()));
+                    plugin.getMainConfigManager().getNotExist(), null));
         }
     }
 }

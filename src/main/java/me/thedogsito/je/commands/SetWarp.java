@@ -22,22 +22,22 @@ public class SetWarp implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console"));
+            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console", null));
             return true;
         }
         FileConfiguration config = plugin.getConfig();
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.setwarp" + "je.*")) {
+        if (!p.hasPermission("je.setwarp") && !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
             return true;
         }
 
         if (!(args.length >= 1)) {
             sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpError")
-                    .replace("%prefix%", config.getString("Config.Prefix"))));
+                    .replace("%prefix%", config.getString("Config.Prefix")), p));
             return true;
         } else if (args.length >= 1) {
             String Name = args[0];
@@ -105,7 +105,7 @@ public class SetWarp implements CommandExecutor {
             sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getSetWarp()
                     .replace("%prefix%", plugin.getMainConfigManager().getPrefix())
                     .replace("%cords%", x + " " + y + " " + z)
-                    .replace("%name%", Name)));
+                    .replace("%name%", Name), p));
             plugin.saveConfig();
             return true;
         }

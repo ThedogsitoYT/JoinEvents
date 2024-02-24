@@ -19,18 +19,10 @@ public class DelWarp implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
             FileConfiguration config = plugin.getConfig();
-            Player p = (Player) sender;
-
-            if (!p.hasPermission("je.delwarp" + "je.*")) {
-                sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
-                return true;
-            }
 
             if (!(args.length >= 1)) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpError2")
-                        .replace("%prefix%", config.getString("Config.Prefix"))));
+                        .replace("%prefix%", config.getString("Config.Prefix")), null));
                 return true;
             } else if (args.length >= 1) {
                 String Name = args[0];
@@ -47,11 +39,11 @@ public class DelWarp implements CommandExecutor {
 
                     sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getDelWarp()
                             .replace("%prefix%", plugin.getMainConfigManager().getPrefix())
-                            .replace("%name%", Name)));
+                            .replace("%name%", Name), null));
                     plugin.saveConfig();
                     return true;
                 } else {
-                    sender.sendMessage(plugin.getMainConfigManager().getNotExistingWarp());
+                    sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub(), null));
                     return true;
                 }
             }
@@ -61,16 +53,16 @@ public class DelWarp implements CommandExecutor {
         FileConfiguration config = plugin.getConfig();
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.delwarp" + "je.*")) {
+        if (!p.hasPermission("je.delwarp") && !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
             return true;
         }
 
         if (!(args.length >= 1)) {
             sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpError2")
-                    .replace("%prefix%", config.getString("Config.Prefix"))));
+                    .replace("%prefix%", config.getString("Config.Prefix")), p));
             return true;
         } else if (args.length >= 1) {
             String CodeName = args[0].toLowerCase();
@@ -88,12 +80,12 @@ public class DelWarp implements CommandExecutor {
 
                 sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getDelWarp()
                         .replace("%prefix%", plugin.getMainConfigManager().getPrefix())
-                        .replace("%name%", Name)));
+                        .replace("%name%", Name), p));
                 plugin.saveConfig();
                 return true;
             }else {
 
-                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingWarp()));
+                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingWarp(), p));
                 return true;
             }
         }

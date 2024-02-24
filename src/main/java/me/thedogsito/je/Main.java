@@ -21,7 +21,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         mainConfigManager = new MainConfigManager(this);
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)"));
+                prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)", null));
         updateChecker();
         registerEvents();
         registerCommands();
@@ -29,7 +29,7 @@ public class Main extends JavaPlugin {
 
     public void onDisable() {
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                prefix + "&f&lGood bay :)"));
+                prefix + "&f&lGood bay :)", null));
     }
 
     public boolean isFolia() {
@@ -74,14 +74,14 @@ public class Main extends JavaPlugin {
                 if (latestversion != null && !getVersion().equals(latestversion)) {
 
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                            "&b&lJoinEvents &3&l>> &c&lThere is a new version available."));
+                            "&b&lJoinEvents &3&l>> &c&lThere is a new version available.", null));
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                            "&b&lJoinEvents &3&l>> &c&lYou can download it at: &b&lhttps://hangar.papermc.io/ThedogsitoYT/JoinEvents/versions"));
+                            "&b&lJoinEvents &3&l>> &c&lYou can download it at: &b&lhttps://hangar.papermc.io/ThedogsitoYT/JoinEvents/versions", null));
                 }
             }
         } catch (Exception ex) {
             Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                    "&b&lJoinEvents &3&l>> &c&lError while checking for updates."));
+                    "&b&lJoinEvents &3&l>> &c&lError while checking for updates.", null));
         }
     }
 

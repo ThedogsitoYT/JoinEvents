@@ -25,23 +25,23 @@ public class Hub implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console"));
+            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console", null));
             return true;
         }
         FileConfiguration config = plugin.getConfig();
         Player p = (Player)sender;
 
-        if(!p.hasPermission("je.hub" + "je.*")) {
+        if (!p.hasPermission("je.hub") && !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
             return true;
         }
 
         if (config.contains("Config.Commands.Hub.X")) {
             Integer WaitingSeconds = plugin.getMainConfigManager().getHubTeleportingSeconds();
 
-            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleporting())
+            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleporting(), p)
                     .replace("%wait%", String.valueOf(WaitingSeconds)));
 
             double x = Double.valueOf(config.getString("Config.Commands.Hub.X").replace(',', '.')).doubleValue();
@@ -58,7 +58,7 @@ public class Hub implements CommandExecutor {
                 executor.schedule(() -> {
                     scheduler.execute(plugin, l, () -> {
                         p.teleportAsync(l).thenRunAsync(() -> {
-                            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleported()));
+                            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleported(), p));
                         });
                     });
                 }, WaitingSeconds, TimeUnit.SECONDS);
@@ -70,10 +70,10 @@ public class Hub implements CommandExecutor {
                 World world = this.plugin.getServer().getWorld(config.getString("Config.Commands.Hub.World"));
                 Location l = new Location(world, x, y, z, yaw, pitch);
                 p.teleport(l);
-                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleported()));
+                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleported(), p));
             }, WaitingSeconds * 20L);
         }else {
-            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub()));
+            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub(), p));
         }
         return true;
     }

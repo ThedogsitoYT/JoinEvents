@@ -18,15 +18,7 @@ public class DelHub implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
-            FileConfiguration config = plugin.getConfig();
-            Player p = (Player) sender;
-
-            if (!p.hasPermission("je.delhub" + "je.*")) {
-                sender.sendMessage(MessageUtil.GetColoredMessages(
-                        plugin.getMainConfigManager().getNotPermission()
-                                .replace("%player%", p.getName())));
-                return true;
-            }
+            FileConfiguration config = plugin.getConfig();;
 
             if (config.contains("Config.Commands.Hub.X")) {
                 config.set("Config.Commands.Hub.X", null);
@@ -37,12 +29,12 @@ public class DelHub implements CommandExecutor {
                 config.set("Config.Commands.Hub.World", null);
 
                 sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.DelHub")
-                        .replace("%prefix%", plugin.getMainConfigManager().getPrefix())));
+                        .replace("%prefix%", plugin.getMainConfigManager().getPrefix()), null));
                 plugin.saveConfig();
                 return true;
             } else {
                 sender.sendMessage(MessageUtil.GetColoredMessages(config.getString(plugin.getMainConfigManager().getNotExistingHub()
-                        .replace("%prefix%", plugin.getMainConfigManager().getPrefix()))));
+                        .replace("%prefix%", plugin.getMainConfigManager().getPrefix())), null));
                 return true;
             }
         }
@@ -50,10 +42,10 @@ public class DelHub implements CommandExecutor {
         FileConfiguration config = plugin.getConfig();
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.setwarp" + "je.*")) {
+        if (!p.hasPermission("je.delhub") && !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
             return true;
         }
 
@@ -66,11 +58,11 @@ public class DelHub implements CommandExecutor {
             config.set("Config.Commands.Hub.World", null);
 
             sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.DelHub")
-                    .replace("%prefix%", plugin.getMainConfigManager().getPrefix())));
+                    .replace("%prefix%", plugin.getMainConfigManager().getPrefix()), p));
             plugin.saveConfig();
             return true;
         } else {
-            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub()));
+            sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub(), p));
             return true;
         }
     }

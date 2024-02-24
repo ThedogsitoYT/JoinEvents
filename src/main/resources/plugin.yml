@@ -1,6 +1,6 @@
 main: me.thedogsito.je.Main
 name: JoinEvents
-version: 3.0.7 BETA
+version: 3.0.0 RC1
 author: Thedogsito
 folia-supported: true
 api-version: 1.20

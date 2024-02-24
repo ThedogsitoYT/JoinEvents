@@ -24,10 +24,7 @@ public class TeleportHub implements Listener {
         Player p = e.getEntity().getPlayer();
 
         if (config.contains("Config.Commands.Hub.X")) {
-            Integer WaitingSeconds = plugin.getMainConfigManager().getHubTeleportingSeconds();
-
-            p.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getHubTeleporting())
-                    .replace("%wait%", String.valueOf(WaitingSeconds)));
+            Integer WaitingSeconds = 0;
 
             double x = Double.valueOf(config.getString("Config.Commands.Hub.X").replace(',', '.')).doubleValue();
             double y = Double.valueOf(config.getString("Config.Commands.Hub.Y").replace(',', '.')).doubleValue();

@@ -24,11 +24,11 @@ public class JoinActionBarListener implements Listener {
             String msg = mainConfigManager.getActionBarText().replace("%player%", p.getName());
 
             if (plugin.getServer().getVersion().contains("1.8")) {
-                Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &c&lThis bossbar not supported on 1.8"));
+                Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &c&lThis bossbar not supported on 1.8", p));
                 return true;
             }
 
-            p.sendActionBar(MessageUtil.GetColoredMessages(msg));
+            p.sendActionBar(MessageUtil.GetColoredMessages(msg, p));
         }
         return true;
     }

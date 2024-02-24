@@ -33,7 +33,7 @@ public class IpProtect implements Listener {
                 if (Name.equalsIgnoreCase(names) && !ips.contains(Ip)) {
                     e.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
                     String KickMessage = "Config.IpsProtected.KickMessage";
-                    e.setKickMessage(MessageUtil.GetColoredMessages(config.getString(KickMessage).replace("%player%", e.getName())));
+                    e.setKickMessage(MessageUtil.GetColoredMessages(config.getString(KickMessage).replace("%player%", e.getName()), null));
                     Bukkit.getConsoleSender().sendMessage("Name attacker:" + e.getName() + "IP attacker = " + Ip);
                 }
             }

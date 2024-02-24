@@ -24,7 +24,7 @@ public class JoinTitlesListener implements Listener {
             String Title = mainConfigManager.getTitle().replace("%player%", p.getName());
             String SubTitle = mainConfigManager.getSubTitle().replace("%player%", p.getName());
 
-            p.sendTitle(MessageUtil.GetColoredMessages(Title), MessageUtil.GetColoredMessages(SubTitle));
+            p.sendTitle(MessageUtil.GetColoredMessages(Title, p), MessageUtil.GetColoredMessages(SubTitle, p));
         }
     }
 }

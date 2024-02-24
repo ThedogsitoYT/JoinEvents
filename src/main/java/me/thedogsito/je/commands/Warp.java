@@ -25,22 +25,22 @@ public class Warp implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console"));
+            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console", null));
             return true;
         }
         FileConfiguration config = plugin.getConfig();
         Player p = (Player)sender;
 
-        if(!p.hasPermission("je.warp" + "je.*")) {
+        if (!p.hasPermission("je.warp") && !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
-                            .replace("%player%", p.getName())));
+                            .replace("%player%", p.getName()), p));
             return true;
         }
 
         if (!(args.length >= 1)) {
             sender.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.NotExistingWarp")
-                    .replace("%prefix%", config.getString("Config.Prefix"))));
+                    .replace("%prefix%", config.getString("Config.Prefix")), p));
             return true;
         } else if (args.length >= 1) {
             String CodeName = args[0].toLowerCase();
@@ -50,7 +50,7 @@ public class Warp implements CommandExecutor {
 
                 sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleporting()
                         .replace("%wait%", String.valueOf(WaitingSeconds))
-                        .replace("%name%", Name)));
+                        .replace("%name%", Name), p));
 
                 double x = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".X").replace(',', '.')).doubleValue();
                 double y = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Y").replace(',', '.')).doubleValue();
@@ -67,7 +67,7 @@ public class Warp implements CommandExecutor {
                         scheduler.execute(plugin, l, () -> {
                             p.teleportAsync(l).thenRunAsync(() -> {
                                 sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleported()
-                                        .replace("%name%", Name)));
+                                        .replace("%name%", Name), p));
                             });
                         });
                     }, WaitingSeconds, TimeUnit.SECONDS);
@@ -81,10 +81,10 @@ public class Warp implements CommandExecutor {
                     Location l = new Location(world, x, y, z, yaw, pitch);
                     p.teleport(l);
                     sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleported()
-                            .replace("%name%", Name)));
+                            .replace("%name%", Name), p));
                 }, WaitingSeconds * 20L);
             }else {
-                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub()));
+                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub(), p));
             }
         }
         return true;

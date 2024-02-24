@@ -45,7 +45,7 @@ public class TextPermissionsListener implements Listener {
                 }
             }
             if (message != null && sound != null) {
-                e.setJoinMessage(MessageUtil.GetColoredMessages(message)
+                e.setJoinMessage(MessageUtil.GetColoredMessages(message, p)
                         .replace("%player%", p.getName()));
             }else {
                 e.setJoinMessage(null);
@@ -59,9 +59,9 @@ public class TextPermissionsListener implements Listener {
                     p.playSound(p.getLocation(), soundEnum, volume, pitch);
                 } catch (IllegalArgumentException ex) {
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                            "&b&lJoinEvents &3&l>> &c&lThe sound: " + separated[0] + " does not exist."));
+                            "&b&lJoinEvents &3&l>> &c&lThe sound: " + separated[0] + " does not exist.", p));
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                            "&b&lJoinEvents &3&l>> &c&lRemember that in 1.9 onwards all Minecraft sounds have been changed"));
+                            "&b&lJoinEvents &3&l>> &c&lRemember that in 1.9 onwards all Minecraft sounds have been changed", p));
                 }
             }
         }
@@ -87,7 +87,7 @@ public class TextPermissionsListener implements Listener {
                 }
             }
             if(message != null) {
-                e.setQuitMessage(MessageUtil.GetColoredMessages(message)
+                e.setQuitMessage(MessageUtil.GetColoredMessages(message, p)
                         .replace("%player%", p.getName()));
             }else {
                 e.setQuitMessage(null);
