@@ -9,8 +9,6 @@ CustomItems:
       - 'DAMAGE_ALL:5'
       - 'FIRE_ASPECT:2'
     Slot: 0
-    CommandsClick:
-      - 'lobby'
   SuperBow:
     Material: BOW
     DisplayName: '&5&lMagic Bow'
@@ -23,8 +21,6 @@ CustomItems:
     Slot: 1
     PotionEffects:
       - SPEED:2:600
-    Commands:
-      - 'summon LightningBolt ~ 70 ~'
 ItemsEvents:
   CancelDropItems: true
   CancelMoveInventory: true
