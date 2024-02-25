@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class MessageUtil {
     public static String GetColoredMessages(String message, Player p) {
-        if (Bukkit.getVersion().contains("1.20")) {
+        if (Bukkit.getVersion().matches("1.(1[6-9]|2[0-0]).*")) {
             Pattern ptn = Pattern.compile("&#[a-fA-F0-9]{6}");
             Matcher m = ptn.matcher(message);
 

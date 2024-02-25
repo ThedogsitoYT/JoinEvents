@@ -4,11 +4,14 @@ import me.thedogsito.je.commands.*;
 import me.thedogsito.je.config.MainConfigManager;
 import me.thedogsito.je.listeners.*;
 import me.thedogsito.je.utils.MessageUtil;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,6 +20,8 @@ public class Main extends JavaPlugin {
     public String version = getDescription().getVersion();
     public String latestversion;
     private MainConfigManager mainConfigManager;
+    private FileConfiguration items = null;
+    private File itemsFile = null;
 
     public void onEnable() {
         mainConfigManager = new MainConfigManager(this);
@@ -25,6 +30,7 @@ public class Main extends JavaPlugin {
         updateChecker();
         registerEvents();
         registerCommands();
+        registerItems();
     }
 
     public void onDisable() {
@@ -39,6 +45,11 @@ public class Main extends JavaPlugin {
         } catch (ClassNotFoundException e) {
             return false;
         }
+    }
+
+    public void BStats() {
+        int pluginId = 21116;
+        Metrics metrics = new Metrics(this, pluginId);
     }
 
     public void registerCommands() {
@@ -60,6 +71,45 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new TextPermissionsListener(this), this);
         getServer().getPluginManager().registerEvents(new TeleportHub(this), this);
         getServer().getPluginManager().registerEvents(new IpProtect(this), this);
+        getServer().getPluginManager().registerEvents(new CustomItems(this), this);
+        getServer().getPluginManager().registerEvents(new DropOrMoveInInventory(this), this);
+    }
+
+    public FileConfiguration getItems() {
+        if (this.items == null)
+            reloadItems();
+        return this.items;
+    }
+
+    public void reloadItems() {
+        if (this.items == null)
+            this.itemsFile = new File(getDataFolder(), "items.yml");
+        this.items = (FileConfiguration)YamlConfiguration.loadConfiguration(this.itemsFile);
+        try {
+            Reader defConfigStream = new InputStreamReader(getResource("items.yml"), "UTF8");
+            if (defConfigStream != null) {
+                YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+                this.items.setDefaults((Configuration)defConfig);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveItems() {
+        try {
+            this.items.save(this.itemsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void registerItems() {
+        this.itemsFile = new File(getDataFolder(), "items.yml");
+        if (!this.itemsFile.exists()) {
+            getItems().options().copyDefaults(true);
+            saveItems();
+        }
     }
 
     public void updateChecker() {

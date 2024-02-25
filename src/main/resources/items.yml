@@ -1,0 +1,31 @@
+CustomItems:
+  SuperSword:
+    Material: DIAMOND_SWORD
+    DisplayName: '&4&lPowerful Sword'
+    Lore:
+      - '&c&lA super powerful sword,'
+      - '&c&lthat can defeat anyone.'
+    Enchantments:
+      - 'DAMAGE_ALL:5'
+      - 'FIRE_ASPECT:2'
+    Slot: 0
+    CommandsClick:
+      - 'lobby'
+  SuperBow:
+    Material: BOW
+    DisplayName: '&5&lMagic Bow'
+    Lore:
+      - '&d&lA magical bow'
+      - '&d&lwith enchanted arrows.'
+    Enchantments:
+      - 'ARROW_DAMAGE:3'
+      - 'ARROW_FIRE:1'
+    Slot: 1
+    PotionEffects:
+      - SPEED:2:600
+    Commands:
+      - 'summon LightningBolt ~ 70 ~'
+ItemsEvents:
+  CancelDropItems: true
+  CancelMoveInventory: true
+  GiveTheFirstTime: false

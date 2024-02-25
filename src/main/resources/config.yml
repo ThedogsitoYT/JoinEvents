@@ -5,7 +5,7 @@ Config:
     Ips:
       - 0.0.0.0
     Names:
-      - 'Thedogsito'
+      - 'player'
     KickMessage: '&c&lYou can not enter because this account is protected by ip'
   Join:
     WelcomeMessage:
