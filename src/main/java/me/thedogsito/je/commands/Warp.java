@@ -46,45 +46,46 @@ public class Warp implements CommandExecutor {
             String CodeName = args[0].toLowerCase();
             String Name = config.getString("Config.Commands.Warps." + CodeName + ".Name");
             if (config.contains("Config.Commands.Warps." + CodeName + ".X")) {
-                Integer WaitingSeconds = plugin.getMainConfigManager().getWarpTeleportingSeconds();
+                if (p.hasPermission("je.warps." + Name)) {
+                    Integer WaitingSeconds = plugin.getMainConfigManager().getWarpTeleportingSeconds();
 
-                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleporting()
-                        .replace("%wait%", String.valueOf(WaitingSeconds))
-                        .replace("%name%", Name), p));
-
-                double x = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".X").replace(',', '.')).doubleValue();
-                double y = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Y").replace(',', '.')).doubleValue();
-                double z = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Z").replace(',', '.')).doubleValue();
-                float yaw = Float.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Yaw").replace(',', '.')).floatValue();
-                float pitch = Float.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Pitch").replace(',', '.')).floatValue();
-
-                if (plugin.isFolia()) {
-                    ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-                    RegionScheduler scheduler = plugin.getServer().getRegionScheduler();
-                    World world = plugin.getServer().getWorld(config.getString("Config.Commands.Warps." + CodeName + ".World"));
-                    Location l = new Location(world, x, y, z, yaw, pitch);
-                    executor.schedule(() -> {
-                        scheduler.execute(plugin, l, () -> {
-                            p.teleportAsync(l).thenRunAsync(() -> {
-                                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleported()
-                                        .replace("%name%", Name), p));
-                            });
-                        });
-                    }, WaitingSeconds, TimeUnit.SECONDS);
-                    return true;
-                }
-
-
-                BukkitScheduler scheduler = plugin.getServer().getScheduler();
-                scheduler.runTaskLater(plugin, () -> {
-                    World world = this.plugin.getServer().getWorld(config.getString("Config.Commands.Warps." + CodeName + ".World"));
-                    Location l = new Location(world, x, y, z, yaw, pitch);
-                    p.teleport(l);
-                    sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleported()
+                    sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleporting()
+                            .replace("%wait%", String.valueOf(WaitingSeconds))
                             .replace("%name%", Name), p));
-                }, WaitingSeconds * 20L);
-            }else {
-                sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub(), p));
+
+                    double x = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".X").replace(',', '.')).doubleValue();
+                    double y = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Y").replace(',', '.')).doubleValue();
+                    double z = Double.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Z").replace(',', '.')).doubleValue();
+                    float yaw = Float.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Yaw").replace(',', '.')).floatValue();
+                    float pitch = Float.valueOf(config.getString("Config.Commands.Warps." + CodeName + ".Pitch").replace(',', '.')).floatValue();
+
+                    if (plugin.isFolia()) {
+                        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                        RegionScheduler scheduler = plugin.getServer().getRegionScheduler();
+                        World world = plugin.getServer().getWorld(config.getString("Config.Commands.Warps." + CodeName + ".World"));
+                        Location l = new Location(world, x, y, z, yaw, pitch);
+                        executor.schedule(() -> {
+                            scheduler.execute(plugin, l, () -> {
+                                p.teleportAsync(l).thenRunAsync(() -> {
+                                    sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleported()
+                                            .replace("%name%", Name), p));
+                                });
+                            });
+                        }, WaitingSeconds, TimeUnit.SECONDS);
+                        return true;
+                    }
+
+                    BukkitScheduler scheduler = plugin.getServer().getScheduler();
+                    scheduler.runTaskLater(plugin, () -> {
+                        World world = this.plugin.getServer().getWorld(config.getString("Config.Commands.Warps." + CodeName + ".World"));
+                        Location l = new Location(world, x, y, z, yaw, pitch);
+                        p.teleport(l);
+                        sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getWarpTeleported()
+                                .replace("%name%", Name), p));
+                    }, WaitingSeconds * 20L);
+                }else {
+                    sender.sendMessage(MessageUtil.GetColoredMessages(plugin.getMainConfigManager().getNotExistingHub(), p));
+                }
             }
         }
         return true;

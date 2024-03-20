@@ -20,6 +20,7 @@ Config:
         - '        &3&lTwitter/x: &bYour twitter'
         - '           &b&l¡Visit our store mc.example.net!'
         - '&3&m&l+---------------------------------------+'
+      EnterFirstTime: '&3%l%player% &b&lin a join for the first time!!'
     TextForRank:
       #define if the welcome text for those who have permits is activated you can use "true/false"
       Enabled: true

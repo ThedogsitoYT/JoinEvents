@@ -4,7 +4,7 @@ import me.thedogsito.je.commands.*;
 import me.thedogsito.je.config.MainConfigManager;
 import me.thedogsito.je.listeners.*;
 import me.thedogsito.je.utils.MessageUtil;
-import org.bstats.bukkit.Metrics;
+import me.thedogsito.je.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,12 +25,13 @@ public class Main extends JavaPlugin {
 
     public void onEnable() {
         mainConfigManager = new MainConfigManager(this);
+        updateChecker();
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)", null));
-        updateChecker();
         registerEvents();
         registerCommands();
         registerItems();
+        BStats();
     }
 
     public void onDisable() {

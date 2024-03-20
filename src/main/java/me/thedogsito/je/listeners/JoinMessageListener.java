@@ -48,5 +48,10 @@ public class JoinMessageListener implements Listener {
                 Bukkit.getServer().dispatchCommand((CommandSender)Bukkit.getConsoleSender(), text.replace("%player%", p.getName()));
             }
         }
+
+        if (!p.hasPlayedBefore()) {
+            Bukkit.getServer().broadcastMessage(MessageUtil.GetColoredMessages(config.getString("Config.Join.WelcomeMessage.EnterFirstTime")
+                    .replace("%player%", p.getName()), p));
+        }
     }
 }

@@ -7,13 +7,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class Je implements CommandExecutor {
     private Main plugin;
-    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.0-RC3/PAPER/JoinEvents.jar";
+    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.0/PAPER/JoinEvents.jar";
     public Je(Main plugin) {
         this.plugin = plugin;
     }
@@ -57,7 +63,7 @@ public class Je implements CommandExecutor {
         sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje get <version/author>", null));
         sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lje update", null));
         sender.sendMessage(" ");
-        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lfly (no added)", null));
+        sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lfly", null));
         sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lhub", null));
         sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&lsethub", null));
         sender.sendMessage(MessageUtil.GetColoredMessages("&3&l/&b&ldelhub", null));

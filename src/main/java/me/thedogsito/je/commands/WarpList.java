@@ -2,9 +2,11 @@ package me.thedogsito.je.commands;
 
 import me.thedogsito.je.Main;
 import me.thedogsito.je.utils.MessageUtil;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +14,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WarpList implements CommandExecutor {
     private final Main plugin;
@@ -58,21 +63,25 @@ public class WarpList implements CommandExecutor {
         if (warpsSection != null) {
             Set<String> warpNames = warpsSection.getKeys(false);
 
+            Boolean V1_16 = Bukkit.getServer().getVersion().contains("1.16");
+            Boolean V1_17 = Bukkit.getServer().getVersion().contains("1.17");
+            Boolean V1_18 = Bukkit.getServer().getVersion().contains("1.18");
+            Boolean V1_19 = Bukkit.getServer().getVersion().contains("1.19");
+            Boolean V1_20 = Bukkit.getServer().getVersion().contains("1.20");
+
             p.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpListLineOne"), null));
             p.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpListUpText"), null));
+            p.sendMessage(MessageUtil.GetColoredMessages("           ", null));
             for (String warpName : warpNames) {
                 String path = "Config.Commands.Warps." + warpName + ".Name";
                 String warpDisplayName = config.getString(path);
 
-                ComponentBuilder warpComponent = new ComponentBuilder(MessageUtil.GetColoredMessages(warpDisplayName, null));
-                warpComponent.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/warp " + warpName));
-                warpComponent.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(MessageUtil.GetColoredMessages("&3&lTp to"+ warpDisplayName, null)).create()));
-
-                p.spigot().sendMessage(warpComponent.create());
+                if (warpDisplayName != null) {
+                    p.sendMessage(MessageUtil.GetColoredMessages(warpDisplayName, p));
+                }
             }
-            p.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpListLineTwo"), null));
         }
-        return true;
+        p.sendMessage(MessageUtil.GetColoredMessages(config.getString("Messages.Warps.WarpListLineTwo"), null));
+        return false;
     }
 }
