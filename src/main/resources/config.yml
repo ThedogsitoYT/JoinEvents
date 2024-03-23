@@ -86,8 +86,8 @@ Messages:
   #defines message of hub and warp
   SetHub: '%prefix% &bThe hub is setted in %cords%'
   DelHub: '%prefix% &cThe hub &c&lis deleted'
-  SetWarp: '%prefix% &bThe warp &3&l"%name%&3&l"&b&l is setted in %cords%'
-  DelWarp: '%prefix% &cThe warp &6&l"%name%&6&l"&c&l is deleted'
+  SetWarp: '%prefix% &bThe warp &3&l"%name%&3&l"&b is setted in %cords%'
+  DelWarp: '%prefix% &cThe warp &6&l"%name%&6&l"&c is deleted'
   #defines message of hub
   Hub:
     HubTeleporting: '%prefix% &bTeleporting hub in %wait%...'
@@ -95,11 +95,18 @@ Messages:
     NotExistingHub: '%prefix% &cNot existing hub'
   #defines message of warps
   Warps:
-    WarpTeleporting: '%prefix% &bTeleporting to the warp &3&l"%name%&3&l" &b&lin %wait%...'
-    WarpTeleported: '%prefix% &bTeleported to the warp &3&l"%name%&3&l"'
+    WarpTeleporting: '%prefix% &bTeleporting to the warp &3"%name%&3&l" &b&lin %wait%...'
+    WarpTeleported: '%prefix% &bTeleported to the warp &3"%name%&3&l"'
     WarpError: '%prefix% &cPlease use the command /setwarp <name>'
     WarpError2: '%prefix% &cPlease use the command /delwarp <name>'
     NotExistingWarp: '%prefix% &cThat warp does not exist or you did not enter a name use: /warp <name>'
     WarpListLineOne: '&3&m&l-----------------'
     WarpListLineTwo: '&3&m&l-----------------'
     WarpListUpText: '&b&l        Warps'
+  Fly:
+    Enable: '%prefix% &bYour fly has been activated'
+    EnableForOther: '%prefix% &b&l%target% &bfly was activated'
+    Disable: '%prefix% &cYour fly has been disabled'
+    DisableForOther: '%prefix% &6&l%target% &cfly was disabled'
+    NotPlayerFound: '%prefix% &cThis player &6&l%target% &cis not online.'
+    ErrorNotArgument: '%prefix% &cPlease use /fly <player>'

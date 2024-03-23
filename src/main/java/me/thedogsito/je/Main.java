@@ -25,9 +25,9 @@ public class Main extends JavaPlugin {
 
     public void onEnable() {
         mainConfigManager = new MainConfigManager(this);
-        updateChecker();
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)", null));
+        updateChecker();
         registerEvents();
         registerCommands();
         registerItems();
@@ -62,6 +62,7 @@ public class Main extends JavaPlugin {
         this.getCommand("delwarp").setExecutor(new DelWarp(this));
         this.getCommand("warplist").setExecutor(new WarpList(this));
         this.getCommand("warp").setExecutor(new Warp(this));
+        this.getCommand("fly").setExecutor(new Fly(this));
     }
 
     public void registerEvents() {

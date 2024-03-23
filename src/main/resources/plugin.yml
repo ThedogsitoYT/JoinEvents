@@ -39,3 +39,5 @@ commands:
     description: This command allows you to go to the warps
     aliases:
       - w
+  fly:
+    description: This command allows you to activate and deactivate the fly
