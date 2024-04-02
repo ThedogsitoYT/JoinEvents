@@ -1,6 +1,6 @@
 main: me.thedogsito.je.Main
 name: JoinEvents
-version: 3.0.0-RC5
+version: 3.0.0
 author: Thedogsito
 softdepend: [PlaceHolderAPI,ItemEdit]
 folia-supported: true

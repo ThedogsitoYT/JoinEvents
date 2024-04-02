@@ -53,7 +53,7 @@ public class DelWarp implements CommandExecutor {
         FileConfiguration config = plugin.getConfig();
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.delwarp") && !p.hasPermission("je.*")) {
+        if (!p.hasPermission("je.delwarp") || !p.hasPermission("je.*")) {
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
                             .replace("%player%", p.getName()), p));

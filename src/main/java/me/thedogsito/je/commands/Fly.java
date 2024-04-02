@@ -17,7 +17,12 @@ public class Fly implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-        if (!sender.hasPermission("je.fly") && !sender.hasPermission("je.*")) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(MessageUtil.GetColoredMessages("&3&l[&b&lJoinEvents&3&l] &c&lThis command not support on console", null));
+            return true;
+        }
+
+        if (!sender.hasPermission("je.fly") || !sender.hasPermission("je.*")) {
             Player p = (Player)sender;
             sender.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()

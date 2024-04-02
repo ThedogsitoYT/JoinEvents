@@ -49,7 +49,7 @@ public class WarpList implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (!p.hasPermission("je.warplist") && !p.hasPermission("je.*")) {
+        if (!p.hasPermission("je.warplist") || !p.hasPermission("je.*")) {
             p.sendMessage(MessageUtil.GetColoredMessages(
                     plugin.getMainConfigManager().getNotPermission()
                             .replace("%player%", p.getName()), p));

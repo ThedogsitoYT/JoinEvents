@@ -51,7 +51,7 @@ public class Je implements CommandExecutor {
     public void help(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.help") && !p.hasPermission("je.*")) {
+            if (!p.hasPermission("je.help") || !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName()), p));
@@ -78,7 +78,7 @@ public class Je implements CommandExecutor {
     public void reload(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.reload") && !p.hasPermission("je.*")) {
+            if (!p.hasPermission("je.reload") || !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName()), p));
@@ -97,7 +97,7 @@ public class Je implements CommandExecutor {
     public void updater(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.update") && !p.hasPermission("je.*")) {
+            if (!p.hasPermission("je.update") || !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName()), p));
@@ -233,7 +233,7 @@ public class Je implements CommandExecutor {
     public void subCommandGet(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.get") && !p.hasPermission("je.*")) {
+            if (!p.hasPermission("je.get") || !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName()), p));
@@ -284,7 +284,7 @@ public class Je implements CommandExecutor {
     public void error(CommandSender sender) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (!p.hasPermission("je.error") && !p.hasPermission("je.*")) {
+            if (!p.hasPermission("je.error") || !p.hasPermission("je.*")) {
                 sender.sendMessage(MessageUtil.GetColoredMessages(
                         plugin.getMainConfigManager().getNotPermission()
                                 .replace("%player%", p.getName()), p));
