@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,9 +20,10 @@ import java.nio.charset.StandardCharsets;
 
 public class Je implements CommandExecutor {
     private Main plugin;
-    String downloadUrl = "https://hangarcdn.papermc.io/plugins/ThedogsitoYT/JoinEvents/versions/3.0.0/PAPER/JoinEvents.jar";
+    private String downloadUrl;
     public Je(Main plugin) {
         this.plugin = plugin;
+        this.downloadUrl = "https://raw.githubusercontent.com/ThedogsitoYT/JoinEvents/master/VersionDowload";
     }
 
     @Override
@@ -211,14 +213,40 @@ public class Je implements CommandExecutor {
     }
 
     private void downloadAndUpdate(Player player) {
+        String actualDownloadUrl = getActualDownloadUrl();
+
+        if (actualDownloadUrl == null) {
+            player.sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &c&lCould not get the actual download link.", player));
+            return;
+        }
+
         UpdateDownloader updateDownloader = new UpdateDownloader(plugin);
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                updateDownloader.downloadAndUpdate(downloadUrl, player);
+                updateDownloader.downloadAndUpdate(actualDownloadUrl, player);
             }
         }.runTaskAsynchronously(plugin);
+    }
+
+    private String getActualDownloadUrl() {
+        try {
+            // Abre una conexión al URL base
+            URL url = new URL("https://raw.githubusercontent.com/ThedogsitoYT/JoinEvents/master/VersionDowload");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            // Lee la respuesta del servidor para obtener el enlace de descarga real
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String actualDownloadUrl = reader.readLine().trim();
+            reader.close();
+
+            return actualDownloadUrl;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void stopUpdateActionBar(Player p) {

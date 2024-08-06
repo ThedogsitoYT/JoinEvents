@@ -5,6 +5,7 @@ import me.thedogsito.je.config.MainConfigManager;
 import me.thedogsito.je.listeners.*;
 import me.thedogsito.je.utils.MessageUtil;
 import me.thedogsito.je.utils.Metrics;
+import me.thedogsito.je.utils.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,6 +15,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Main extends JavaPlugin {
     public static String prefix = "&3&l[&b&lJoinEvents&3&l] ";
@@ -22,21 +27,37 @@ public class Main extends JavaPlugin {
     private MainConfigManager mainConfigManager;
     private FileConfiguration items = null;
     private File itemsFile = null;
+    private Connection connection;
 
     public void onEnable() {
         mainConfigManager = new MainConfigManager(this);
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lHas been enabled &3&l(&b&lVersion: " + version + "&3&l)", null));
+        connectDatabase();
         updateChecker();
         registerEvents();
         registerCommands();
         registerItems();
         BStats();
+        isPlaceholderAPI();
     }
 
     public void onDisable() {
         Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                 prefix + "&f&lGood bay :)", null));
+    }
+
+    private void connectDatabase() {
+        try {
+            String dbUrl = "jdbc:sqlite:" + getDataFolder().getAbsolutePath() + File.separator + "players.db";
+            connection = DriverManager.getConnection(dbUrl);
+
+            try (PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS player_data (uuid TEXT PRIMARY KEY, join_date TIMESTAMP, last_login TIMESTAMP)")) {
+                statement.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages("&b&lJoinEvents &3&l>> &c&lDatabase connection error" + ex, null));
+        }
     }
 
     public boolean isFolia() {
@@ -51,6 +72,12 @@ public class Main extends JavaPlugin {
     public void BStats() {
         int pluginId = 21116;
         Metrics metrics = new Metrics(this, pluginId);
+    }
+
+    public void isPlaceholderAPI() {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderExpansion(this).register();
+        }
     }
 
     public void registerCommands() {
@@ -75,6 +102,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new IpProtect(this), this);
         getServer().getPluginManager().registerEvents(new CustomItems(this), this);
         getServer().getPluginManager().registerEvents(new DropOrMoveInInventory(this), this);
+        getServer().getPluginManager().registerEvents(new SQLListener(this, connection), this);
     }
 
     public FileConfiguration getItems() {

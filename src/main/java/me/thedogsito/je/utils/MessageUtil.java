@@ -16,7 +16,8 @@ public class MessageUtil {
         Boolean V1_18 = version.contains("1.18");
         Boolean V1_19 = version.contains("1.19");
         Boolean V1_20 = version.contains("1.20");
-        if (V1_16 || V1_17 || V1_18 || V1_19 || V1_20) {
+        Boolean V1_21 = version.contains("1.21");
+        if (V1_16 || V1_17 || V1_18 || V1_19 || V1_20 || V1_21) {
             Pattern ptn = Pattern.compile("&#[a-fA-F0-9]{6}");
             Matcher m = ptn.matcher(message);
 
@@ -49,7 +50,9 @@ public class MessageUtil {
         Boolean V1_18 = version.contains("1.18");
         Boolean V1_19 = version.contains("1.19");
         Boolean V1_20 = version.contains("1.20");
-        if (V1_16 || V1_17 || V1_18 || V1_19 || V1_20) {
+        Boolean V1_21 = version.contains("1.21");
+
+        if (V1_16 || V1_17 || V1_18 || V1_19 || V1_20 || V1_21) {
             try {
                 Pattern ptn = Pattern.compile("&#[a-fA-F0-9]{6}");
                 Matcher matcher = ptn.matcher(message);
