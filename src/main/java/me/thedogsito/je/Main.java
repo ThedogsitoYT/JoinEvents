@@ -156,7 +156,7 @@ public class Main extends JavaPlugin {
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
                             "&b&lJoinEvents &3&l>> &c&lThere is a new version available.", null));
                     Bukkit.getConsoleSender().sendMessage(MessageUtil.GetColoredMessages(
-                            "&b&lJoinEvents &3&l>> &c&lYou can download it at: &b&lhttps://hangar.papermc.io/ThedogsitoYT/JoinEvents/versions", null));
+                            "&b&lJoinEvents &3&l>> &c&lYou can download it at: &b&lhttps://www.curseforge.com/minecraft/bukkit-plugins/joinevents/files", null));
                 }
             }
         } catch (Exception ex) {
